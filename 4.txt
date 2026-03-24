@@ -1,0 +1,1713 @@
+Всё вместе как единый MVP
+И визуализацию, и формальные проверки
+Всё перечисленное
+если будут идеи, как искать ветки по двоичной прогрессии, можешь записать, Я бы сделал существующие простые числа в порядке, и через мой способ и чтобы формульно можно было рисовать на графике те, которые мои, и отрисовывать процент попадания, тоесть чтобы прям во время постройки формул можно было искать правильность формул, я думаю мои формулы должны быть основаны во первых на прогрессии числа 2. тоесть 4 32 256 2048 итд, все время умножая на 8, походу так и растет прогрессия, и в зависимости от последовательности нужно либо прибовлять либо убавлять, тоесть 4+2 = 6, 32 - 2 = 30, хотя сам подумай на прогрессией я ешё точно не уверен, Ключевой момент, что это зеркальная прогрессия определяет зеркальность внутри. тоесть повторения зеркальные плюсов и минусов между прогрессией
+
+Быстрый обзор готов — теперь смотрю структуру папок и ключевые входные файлы.
+Action: {"type": "mcp_tool", "tool_name": "mcp_view_bulk", "tool_arguments": {"paths": ["/app", "/app/README.md", "/app/frontend", "/app/backend"]}}
+Observation: ===DIR: /app
+/app/ (depth=2):
+/app/README.md
+/app/backend/
+/app/backend/requirements.txt
+/app/backend/server.py
+/app/frontend/
+/app/frontend/README.md
+/app/frontend/components.json
+/app/frontend/craco.config.js
+/app/frontend/jsconfig.json
+/app/frontend/package.json
+/app/frontend/plugins/
+/app/frontend/postcss.config.js
+/app/frontend/public/
+/app/frontend/src/
+/app/frontend/tailwind.config.js
+/app/frontend/yarn.lock
+/app/memory/
+/app/test_reports/
+/app/test_reports/pytest/
+/app/test_result.md
+/app/tests/
+/app/tests/__init__.py
+/app/yarn.lock
+
+===END
+
+===FILE: /app/README.md
+/app/README.md:
+1|# Here are your Instructions
+2|
+
+===END
+
+===DIR: /app/frontend
+/app/frontend/ (depth=2):
+/app/frontend/README.md
+/app/frontend/components.json
+/app/frontend/craco.config.js
+/app/frontend/jsconfig.json
+/app/frontend/package.json
+/app/frontend/plugins/
+/app/frontend/plugins/health-check/
+/app/frontend/postcss.config.js
+/app/frontend/public/
+/app/frontend/public/index.html
+/app/frontend/src/
+/app/frontend/src/App.css
+/app/frontend/src/App.js
+/app/frontend/src/components/
+/app/frontend/src/hooks/
+/app/frontend/src/index.css
+/app/frontend/src/index.js
+/app/frontend/src/lib/
+/app/frontend/tailwind.config.js
+/app/frontend/yarn.lock
+
+===END
+
+===DIR: /app/backend
+/app/backend/ (depth=2):
+/app/backend/requirements.txt
+/app/backend/server.py
+
+===ENDВижу базовый шаблон — читаю фронтенд и бэкенд, чтобы встроить исследовательский MVP аккуратно.
+Action: file_editor view /app/frontend/package.json
+Observation: [Showing lines 1-92 of 92 total] /app/frontend/package.json:
+1|{
+2|  "name": "frontend",
+3|  "version": "0.1.0",
+4|  "private": true,
+5|  "dependencies": {
+6|    "@hookform/resolvers": "^5.0.1",
+7|    "@radix-ui/react-accordion": "^1.2.8",
+8|    "@radix-ui/react-alert-dialog": "^1.1.11",
+9|    "@radix-ui/react-aspect-ratio": "^1.1.4",
+10|    "@radix-ui/react-avatar": "^1.1.7",
+11|    "@radix-ui/react-checkbox": "^1.2.3",
+12|    "@radix-ui/react-collapsible": "^1.1.8",
+13|    "@radix-ui/react-context-menu": "^2.2.12",
+14|    "@radix-ui/react-dialog": "^1.1.11",
+15|    "@radix-ui/react-dropdown-menu": "^2.1.12",
+16|    "@radix-ui/react-hover-card": "^1.1.11",
+17|    "@radix-ui/react-label": "^2.1.4",
+18|    "@radix-ui/react-menubar": "^1.1.12",
+19|    "@radix-ui/react-navigation-menu": "^1.2.10",
+20|    "@radix-ui/react-popover": "^1.1.11",
+21|    "@radix-ui/react-progress": "^1.1.4",
+22|    "@radix-ui/react-radio-group": "^1.3.4",
+23|    "@radix-ui/react-scroll-area": "^1.2.6",
+24|    "@radix-ui/react-select": "^2.2.2",
+25|    "@radix-ui/react-separator": "^1.1.4",
+26|    "@radix-ui/react-slider": "^1.3.2",
+27|    "@radix-ui/react-slot": "^1.2.0",
+28|    "@radix-ui/react-switch": "^1.2.2",
+29|    "@radix-ui/react-tabs": "^1.1.9",
+30|    "@radix-ui/react-toast": "^1.2.11",
+31|    "@radix-ui/react-toggle": "^1.1.6",
+32|    "@radix-ui/react-toggle-group": "^1.1.7",
+33|    "@radix-ui/react-tooltip": "^1.2.4",
+34|    "axios": "^1.8.4",
+35|    "class-variance-authority": "^0.7.1",
+36|    "clsx": "^2.1.1",
+37|    "cmdk": "^1.1.1",
+38|    "cra-template": "1.2.0",
+39|    "date-fns": "^4.1.0",
+40|    "embla-carousel-react": "^8.6.0",
+41|    "input-otp": "^1.4.2",
+42|    "lucide-react": "^0.507.0",
+43|    "next-themes": "^0.4.6",
+44|    "react": "^19.0.0",
+45|    "react-day-picker": "8.10.1",
+46|    "react-dom": "^19.0.0",
+47|    "react-hook-form": "^7.56.2",
+48|    "react-resizable-panels": "^3.0.1",
+49|    "react-router-dom": "^7.5.1",
+50|    "react-scripts": "5.0.1",
+51|    "recharts": "^3.6.0",
+52|    "sonner": "^2.0.3",
+53|    "tailwind-merge": "^3.2.0",
+54|    "tailwindcss-animate": "^1.0.7",
+55|    "vaul": "^1.1.2",
+56|    "zod": "^3.24.4"
+57|  },
+58|  "scripts": {
+59|    "start": "craco start",
+60|    "build": "craco build",
+61|    "test": "craco test"
+62|  },
+63|  "browserslist": {
+64|    "production": [
+65|      ">0.2%",
+66|      "not dead",
+67|      "not op_mini all"
+68|    ],
+69|    "development": [
+70|      "last 1 chrome version",
+71|      "last 1 firefox version",
+72|      "last 1 safari version"
+73|    ]
+74|  },
+75|  "devDependencies": {
+76|    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+77|    "@craco/craco": "^7.1.0",
+78|    "@emergentbase/visual-edits": "https://assets.emergent.sh/npm/emergentbase-visual-edits-1.0.8.tgz",
+79|    "@eslint/js": "9.23.0",
+80|    "autoprefixer": "^10.4.20",
+81|    "eslint": "9.23.0",
+82|    "eslint-plugin-import": "2.31.0",
+83|    "eslint-plugin-jsx-a11y": "6.10.2",
+84|    "eslint-plugin-react": "7.37.4",
+85|    "eslint-plugin-react-hooks": "5.2.0",
+86|    "globals": "15.15.0",
+87|    "postcss": "^8.4.49",
+88|    "tailwindcss": "^3.4.17"
+89|  },
+90|  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+91|}
+92|
+[End of file]
+Action: file_editor view /app/backend/requirements.txt
+Observation: [Showing lines 1-28 of 28 total] /app/backend/requirements.txt:
+1|fastapi==0.110.1
+2|uvicorn==0.25.0
+3|boto3>=1.34.129
+4|requests-oauthlib>=2.0.0
+5|cryptography>=42.0.8
+6|python-dotenv>=1.0.1
+7|pymongo==4.5.0
+8|pydantic>=2.6.4
+9|email-validator>=2.2.0
+10|pyjwt>=2.10.1
+11|bcrypt==4.1.3
+12|passlib>=1.7.4
+13|tzdata>=2024.2
+14|motor==3.3.1
+15|pytest>=8.0.0
+16|black>=24.1.1
+17|isort>=5.13.2
+18|flake8>=7.0.0
+19|mypy>=1.8.0
+20|python-jose>=3.3.0
+21|requests>=2.31.0
+22|pandas>=2.2.0
+23|numpy>=1.26.0
+24|python-multipart>=0.0.9
+25|jq>=1.6.0
+26|typer>=0.9.0
+27|emergentintegrations==0.1.0
+28|
+[End of file]
+Action: file_editor view /app/backend/server.py
+Observation: [Showing lines 1-89 of 89 total] /app/backend/server.py:
+1|from fastapi import FastAPI, APIRouter
+2|from dotenv import load_dotenv
+3|from starlette.middleware.cors import CORSMiddleware
+4|from motor.motor_asyncio import AsyncIOMotorClient
+5|import os
+6|import logging
+7|from pathlib import Path
+8|from pydantic import BaseModel, Field, ConfigDict
+9|from typing import List
+10|import uuid
+11|from datetime import datetime, timezone
+12|
+13|
+14|ROOT_DIR = Path(__file__).parent
+15|load_dotenv(ROOT_DIR / '.env')
+16|
+17|# MongoDB connection
+18|mongo_url = os.environ['MONGO_URL']
+19|client = AsyncIOMotorClient(mongo_url)
+20|db = client[os.environ['DB_NAME']]
+21|
+22|# Create the main app without a prefix
+23|app = FastAPI()
+24|
+25|# Create a router with the /api prefix
+26|api_router = APIRouter(prefix="/api")
+27|
+28|
+29|# Define Models
+30|class StatusCheck(BaseModel):
+31|    model_config = ConfigDict(extra="ignore")  # Ignore MongoDB's _id field
+32|    
+33|    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+34|    client_name: str
+35|    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+36|
+37|class StatusCheckCreate(BaseModel):
+38|    client_name: str
+39|
+40|# Add your routes to the router instead of directly to app
+41|@api_router.get("/")
+42|async def root():
+43|    return {"message": "Hello World"}
+44|
+45|@api_router.post("/status", response_model=StatusCheck)
+46|async def create_status_check(input: StatusCheckCreate):
+47|    status_dict = input.model_dump()
+48|    status_obj = StatusCheck(**status_dict)
+49|    
+50|    # Convert to dict and serialize datetime to ISO string for MongoDB
+51|    doc = status_obj.model_dump()
+52|    doc['timestamp'] = doc['timestamp'].isoformat()
+53|    
+54|    _ = await db.status_checks.insert_one(doc)
+55|    return status_obj
+56|
+57|@api_router.get("/status", response_model=List[StatusCheck])
+58|async def get_status_checks():
+59|    # Exclude MongoDB's _id field from the query results
+60|    status_checks = await db.status_checks.find({}, {"_id": 0}).to_list(1000)
+61|    
+62|    # Convert ISO string timestamps back to datetime objects
+63|    for check in status_checks:
+64|        if isinstance(check['timestamp'], str):
+65|            check['timestamp'] = datetime.fromisoformat(check['timestamp'])
+66|    
+67|    return status_checks
+68|
+69|# Include the router in the main app
+70|app.include_router(api_router)
+71|
+72|app.add_middleware(
+73|    CORSMiddleware,
+74|    allow_credentials=True,
+75|    allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
+76|    allow_methods=["*"],
+77|    allow_headers=["*"],
+78|)
+79|
+80|# Configure logging
+81|logging.basicConfig(
+82|    level=logging.INFO,
+83|    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+84|)
+85|logger = logging.getLogger(__name__)
+86|
+87|@app.on_event("shutdown")
+88|async def shutdown_db_client():
+89|    client.close()
+[End of file]
+Action: file_editor view /app/frontend/src/App.js
+Observation: [Showing lines 1-55 of 55 total] /app/frontend/src/App.js:
+1|import { useEffect } from "react";
+2|import "@/App.css";
+3|import { BrowserRouter, Routes, Route } from "react-router-dom";
+4|import axios from "axios";
+5|
+6|const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+7|const API = `${BACKEND_URL}/api`;
+8|
+9|const Home = () => {
+10|  const helloWorldApi = async () => {
+11|    try {
+12|      const response = await axios.get(`${API}/`);
+13|      console.log(response.data.message);
+14|    } catch (e) {
+15|      console.error(e, `errored out requesting / api`);
+16|    }
+17|  };
+18|
+19|  useEffect(() => {
+20|    helloWorldApi();
+21|  }, []);
+22|
+23|  return (
+24|    <div>
+25|      <header className="App-header">
+26|        <a
+27|          className="App-link"
+28|          href="https://emergent.sh"
+29|          target="_blank"
+30|          rel="noopener noreferrer"
+31|        >
+32|          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
+33|        </a>
+34|        <p className="mt-5">Building something incredible ~!</p>
+35|      </header>
+36|    </div>
+37|  );
+38|};
+39|
+40|function App() {
+41|  return (
+42|    <div className="App">
+43|      <BrowserRouter>
+44|        <Routes>
+45|          <Route path="/" element={<Home />}>
+46|            <Route index element={<Home />} />
+47|          </Route>
+48|        </Routes>
+49|      </BrowserRouter>
+50|    </div>
+51|  );
+52|}
+53|
+54|export default App;
+55|
+[End of file]
+Action: file_editor view /app/frontend/src/App.css
+Observation: [Showing lines 1-35 of 35 total] /app/frontend/src/App.css:
+1|.App-logo {
+2|    height: 40vmin;
+3|    pointer-events: none;
+4|}
+5|
+6|@media (prefers-reduced-motion: no-preference) {
+7|    .App-logo {
+8|        animation: App-logo-spin infinite 20s linear;
+9|    }
+10|}
+11|
+12|.App-header {
+13|    background-color: #0f0f10;
+14|    min-height: 100vh;
+15|    display: flex;
+16|    flex-direction: column;
+17|    align-items: center;
+18|    justify-content: center;
+19|    font-size: calc(10px + 2vmin);
+20|    color: white;
+21|}
+22|
+23|.App-link {
+24|    color: #61dafb;
+25|}
+26|
+27|@keyframes App-logo-spin {
+28|    from {
+29|        transform: rotate(0deg);
+30|    }
+31|    to {
+32|        transform: rotate(360deg);
+33|    }
+34|}
+35|
+[End of file]
+Action: file_editor view /app/frontend/src/index.css
+Observation: [Showing lines 1-116 of 116 total] /app/frontend/src/index.css:
+1|@tailwind base;
+2|@tailwind components;
+3|@tailwind utilities;
+4|
+5|body {
+6|    margin: 0;
+7|    font-family:
+8|        -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+9|        "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+10|        sans-serif;
+11|    -webkit-font-smoothing: antialiased;
+12|    -moz-osx-font-smoothing: grayscale;
+13|}
+14|
+15|code {
+16|    font-family:
+17|        source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+18|}
+19|
+20|@layer base {
+21|    :root {
+22|        --background: 0 0% 100%;
+23|        --foreground: 0 0% 3.9%;
+24|        --card: 0 0% 100%;
+25|        --card-foreground: 0 0% 3.9%;
+26|        --popover: 0 0% 100%;
+27|        --popover-foreground: 0 0% 3.9%;
+28|        --primary: 0 0% 9%;
+29|        --primary-foreground: 0 0% 98%;
+30|        --secondary: 0 0% 96.1%;
+31|        --secondary-foreground: 0 0% 9%;
+32|        --muted: 0 0% 96.1%;
+33|        --muted-foreground: 0 0% 45.1%;
+34|        --accent: 0 0% 96.1%;
+35|        --accent-foreground: 0 0% 9%;
+36|        --destructive: 0 84.2% 60.2%;
+37|        --destructive-foreground: 0 0% 98%;
+38|        --border: 0 0% 89.8%;
+39|        --input: 0 0% 89.8%;
+40|        --ring: 0 0% 3.9%;
+41|        --chart-1: 12 76% 61%;
+42|        --chart-2: 173 58% 39%;
+43|        --chart-3: 197 37% 24%;
+44|        --chart-4: 43 74% 66%;
+45|        --chart-5: 27 87% 67%;
+46|        --radius: 0.5rem;
+47|    }
+48|    .dark {
+49|        --background: 0 0% 3.9%;
+50|        --foreground: 0 0% 98%;
+51|        --card: 0 0% 3.9%;
+52|        --card-foreground: 0 0% 98%;
+53|        --popover: 0 0% 3.9%;
+54|        --popover-foreground: 0 0% 98%;
+55|        --primary: 0 0% 98%;
+56|        --primary-foreground: 0 0% 9%;
+57|        --secondary: 0 0% 14.9%;
+58|        --secondary-foreground: 0 0% 98%;
+59|        --muted: 0 0% 14.9%;
+60|        --muted-foreground: 0 0% 63.9%;
+61|        --accent: 0 0% 14.9%;
+62|        --accent-foreground: 0 0% 98%;
+63|        --destructive: 0 62.8% 30.6%;
+64|        --destructive-foreground: 0 0% 98%;
+65|        --border: 0 0% 14.9%;
+66|        --input: 0 0% 14.9%;
+67|        --ring: 0 0% 83.1%;
+68|        --chart-1: 220 70% 50%;
+69|        --chart-2: 160 60% 45%;
+70|        --chart-3: 30 80% 55%;
+71|        --chart-4: 280 65% 60%;
+72|        --chart-5: 340 75% 55%;
+73|    }
+74|}
+75|
+76|@layer base {
+77|    * {
+78|        @apply border-border;
+79|    }
+80|    body {
+81|        @apply bg-background text-foreground;
+82|    }
+83|}
+84|
+85|@layer base {
+86|    [data-debug-wrapper="true"] {
+87|        display: contents !important;
+88|    }
+89|
+90|    [data-debug-wrapper="true"] > * {
+91|        margin-left: inherit;
+92|        margin-right: inherit;
+93|        margin-top: inherit;
+94|        margin-bottom: inherit;
+95|        padding-left: inherit;
+96|        padding-right: inherit;
+97|        padding-top: inherit;
+98|        padding-bottom: inherit;
+99|        column-gap: inherit;
+100|        row-gap: inherit;
+101|        gap: inherit;
+102|        border-left-width: inherit;
+103|        border-right-width: inherit;
+104|        border-top-width: inherit;
+105|        border-bottom-width: inherit;
+106|        border-left-style: inherit;
+107|        border-right-style: inherit;
+108|        border-top-style: inherit;
+109|        border-bottom-style: inherit;
+110|        border-left-color: inherit;
+111|        border-right-color: inherit;
+112|        border-top-color: inherit;
+113|        border-bottom-color: inherit;
+114|    }
+115|}
+116|
+[End of file]План интерфейса готов — теперь читаю его и сразу перехожу к сборке.
+Action: file_editor view /app/design_guidelines.json
+Observation: [Showing lines 1-159 of 159 total] /app/design_guidelines.json:
+1|{
+2|  "project_name": "Number Resonance: Deep Research",
+3|  "design_philosophy": {
+4|    "theme": "Deep Space Research",
+5|    "mode": "dark",
+6|    "emotional_tone": "Scientific, Precise, Mysterious, Discoverable",
+7|    "core_principles": [
+8|      "Data is the hero: The UI recedes, data glows.",
+9|      "Mathematical Beauty: Use Golden Ratio and Fibonacci sequences for spacing where possible.",
+10|      "Interaction is Exploration: Hover states reveal hidden layers of data.",
+11|      "Performance First: No lag in visualizations.",
+12|      "Structure: Split view for Code/Formula vs Visuals."
+13|    ]
+14|  },
+15|  "typography": {
+16|    "font_families": {
+17|      "headings": "Chivo, sans-serif",
+18|      "body": "IBM Plex Sans, sans-serif",
+19|      "mono": "JetBrains Mono, monospace"
+20|    },
+21|    "installation_instructions": "npm install @fontsource/chivo @fontsource/ibm-plex-sans @fontsource/jetbrains-mono",
+22|    "usage_rules": [
+23|      "Use Chivo for all H1-H6 headings. Tracking tight (-0.02em).",
+24|      "Use IBM Plex Sans for all UI text (labels, buttons, tooltips).",
+25|      "Use JetBrains Mono for ALL numbers, data tables, code inputs, and formulas.",
+26|      "Headings should be uppercase for H6 (labels) with wide tracking.",
+27|      "Body text size: 14px (text-sm) for density, 16px (text-base) for readability."
+28|    ]
+29|  },
+30|  "colors": {
+31|    "palette": {
+32|      "background": "#020617",
+33|      "card": "#0F172A",
+34|      "card_foreground": "#F8FAFC",
+35|      "popover": "#0F172A",
+36|      "popover_foreground": "#F8FAFC",
+37|      "primary": "#6366F1",
+38|      "primary_foreground": "#F8FAFC",
+39|      "secondary": "#1E293B",
+40|      "secondary_foreground": "#F8FAFC",
+41|      "muted": "#1E293B",
+42|      "muted_foreground": "#94A3B8",
+43|      "accent": "#1E293B",
+44|      "accent_foreground": "#F8FAFC",
+45|      "destructive": "#991B1B",
+46|      "destructive_foreground": "#F8FAFC",
+47|      "border": "#1E293B",
+48|      "input": "#1E293B",
+49|      "ring": "#6366F1"
+50|    },
+51|    "semantic_colors": {
+52|      "prime_positive": "#10B981",
+53|      "prime_negative": "#EF4444",
+54|      "mirror_symmetry": "#D946EF",
+55|      "binary_zero": "#475569",
+56|      "binary_one": "#3B82F6",
+57|      "grid_lines": "rgba(30, 41, 59, 0.5)"
+58|    },
+59|    "gradients": {
+60|      "hero_glow": "radial-gradient(circle at center, rgba(99, 102, 241, 0.15) 0%, rgba(2, 6, 23, 0) 70%)",
+61|      "active_border": "linear-gradient(90deg, #6366F1 0%, #D946EF 100%)"
+62|    }
+63|  },
+64|  "spacing_and_layout": {
+65|    "grid_system": "Bento Grid (CSS Grid)",
+66|    "container_padding": "p-4 md:p-6 lg:p-8",
+67|    "gap_size": "gap-4 md:gap-6",
+68|    "border_radius": {
+69|      "outer": "rounded-xl",
+70|      "inner": "rounded-lg",
+71|      "button": "rounded-md"
+72|    },
+73|    "max_width": "max-w-7xl mx-auto"
+74|  },
+75|  "components": {
+76|    "buttons": {
+77|      "default": "bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_10px_rgba(99,102,241,0.3)] transition-all duration-300",
+78|      "outline": "border border-input bg-transparent hover:bg-accent hover:text-accent-foreground",
+79|      "ghost": "hover:bg-accent hover:text-accent-foreground"
+80|    },
+81|    "cards": {
+82|      "base": "bg-card text-card-foreground border border-border shadow-sm hover:border-primary/50 transition-colors duration-300",
+83|      "glass": "bg-card/70 backdrop-blur-md border-white/5"
+84|    },
+85|    "inputs": {
+86|      "base": "bg-background border-input ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 font-mono"
+87|    },
+88|    "navigation": {
+89|      "sidebar": "w-64 border-r border-border bg-card/50 backdrop-blur-xl h-screen sticky top-0"
+90|    },
+91|    "visualizations": {
+92|      "chart_container": "w-full h-[400px] bg-background/50 rounded-xl border border-border p-4 relative overflow-hidden",
+93|      "tooltip": "bg-popover text-popover-foreground border border-border rounded-lg shadow-xl p-2 text-xs font-mono"
+94|    }
+95|  },
+96|  "visual_enhancers": {
+97|    "glassmorphism": "backdrop-filter: blur(12px); background: rgba(15, 23, 42, 0.6);",
+98|    "glow_effects": "box-shadow: 0 0 20px rgba(99, 102, 241, 0.15);",
+99|    "micro_interactions": "transform hover:-translate-y-1 transition-transform duration-200",
+100|    "loading_states": "animate-pulse bg-muted/50 rounded"
+101|  },
+102|  "assets": {
+103|    "icons": "Lucide React (default)",
+104|    "library": "lucide-react",
+105|    "logo_style": "Geometric, Monoline, Abstract (use pure CSS or SVG)"
+106|  },
+107|  "motion": {
+108|    "duration": {
+109|      "fast": "150ms",
+110|      "normal": "300ms",
+111|      "slow": "500ms"
+112|    },
+113|    "easing": "cubic-bezier(0.4, 0, 0.2, 1)"
+114|  },
+115|  "accessibility": {
+116|    "contrast": "Ensure text contrast ratio of at least 4.5:1 against background.",
+117|    "focus_states": "Visible ring-2 ring-primary ring-offset-2 ring-offset-background.",
+118|    "reduced_motion": "Respect prefers-reduced-motion media query."
+119|  },
+120|  "instructions_to_main_agent": {
+121|    "setup": [
+122|      "Install required fonts: `npm install @fontsource/chivo @fontsource/ibm-plex-sans @fontsource/jetbrains-mono`",
+123|      "Update `tailwind.config.js` to extend the theme with the colors and fonts defined above.",
+124|      "Import fonts in `index.js` or `App.js`: `import '@fontsource/chivo'; import '@fontsource/ibm-plex-sans'; import '@fontsource/jetbrains-mono';`",
+125|      "Configure `index.css` with the CSS variables for the dark theme."
+126|    ],
+127|    "implementation_order": [
+128|      "1. Setup Theme & Typography",
+129|      "2. Create Layout Shell (Sidebar + Main Area)",
+130|      "3. Build Dashboard Metrics Components",
+131|      "4. Implement Primorial Tree Visualization Container",
+132|      "5. Implement Formula Constructor Panel"
+133|    ],
+134|    "universal_guidelines": [
+135|      "DO NOT use gradients for text, it reduces readability.",
+136|      "DO NOT center align large blocks of text.",
+137|      "ALWAYS use the defined color palette variables (e.g., `bg-primary`, `text-muted-foreground`).",
+138|      "Use `data-testid` on all interactive elements."
+139|    ]
+140|  },
+141|  "universal_guidelines_for_main_agent": [
+142|    "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients",
+143|    "Don't make generic centered layouts, simplistic gradients, and uniform styling.",
+144|    "Create depth through layered design elements with z-index hierarchy",
+145|    "Use glass-morphism effects with backdrop filters (12-24px blur)",
+146|    "You MUST NOT apply universal transition. Eg: transition: all. This results in breaking transforms. Always add transitions for specific interactive elements like button, input excluding transforms",
+147|    "You MUST NOT center align the app container, ie do not add .App { text-align: center; } in the css file. This disrupts the human natural reading flow of text",
+148|    "Always use modern button styles like pill-shaped, or sharp button with interaction animations & color relevant to the app style",
+149|    "NEVER: use AI assistant Emoji characters like 🤖🧠💭💡🔮🎯📚🎭🎬🎪🎉🎊🎁🎀🎂🍰🎈🎨🎰💰💵💳🏦💎🪙💸🤑📊📈📉💹🔢🏆🥇 etc for icons.",
+150|    "Every interaction needs micro-animations - hover states, transitions, parallax effects, and entrance animations. Static = dead.",
+151|    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+152|    "Subtle grain textures, noise overlays, custom cursors, selection states, and loading animations: separates good from extraordinary.",
+153|    "Main agent relies on these image URLs. Missing categories (especially sponsor logos) = main agent will use placeholder text which is FORBIDDEN",
+154|    "Components MUST use named exports (export const ComponentName = ...)",
+155|    "Pages MUST use default exports (export default function PageName() {...})",
+156|    "Use sonner for toasts"
+157|  ]
+158|}
+159|
+[End of file]Сейчас дочитаю готовые UI-кирпичики и параллельно подготовлю нужные зависимости.
+Action: file_editor view /app/frontend/tailwind.config.js
+Observation: [Showing lines 1-82 of 82 total] /app/frontend/tailwind.config.js:
+1|/** @type {import('tailwindcss').Config} */
+2|module.exports = {
+3|    darkMode: ["class"],
+4|    content: [
+5|    "./src/**/*.{js,jsx,ts,tsx}",
+6|    "./public/index.html"
+7|  ],
+8|  theme: {
+9|        extend: {
+10|                borderRadius: {
+11|                        lg: 'var(--radius)',
+12|                        md: 'calc(var(--radius) - 2px)',
+13|                        sm: 'calc(var(--radius) - 4px)'
+14|                },
+15|                colors: {
+16|                        background: 'hsl(var(--background))',
+17|                        foreground: 'hsl(var(--foreground))',
+18|                        card: {
+19|                                DEFAULT: 'hsl(var(--card))',
+20|                                foreground: 'hsl(var(--card-foreground))'
+21|                        },
+22|                        popover: {
+23|                                DEFAULT: 'hsl(var(--popover))',
+24|                                foreground: 'hsl(var(--popover-foreground))'
+25|                        },
+26|                        primary: {
+27|                                DEFAULT: 'hsl(var(--primary))',
+28|                                foreground: 'hsl(var(--primary-foreground))'
+29|                        },
+30|                        secondary: {
+31|                                DEFAULT: 'hsl(var(--secondary))',
+32|                                foreground: 'hsl(var(--secondary-foreground))'
+33|                        },
+34|                        muted: {
+35|                                DEFAULT: 'hsl(var(--muted))',
+36|                                foreground: 'hsl(var(--muted-foreground))'
+37|                        },
+38|                        accent: {
+39|                                DEFAULT: 'hsl(var(--accent))',
+40|                                foreground: 'hsl(var(--accent-foreground))'
+41|                        },
+42|                        destructive: {
+43|                                DEFAULT: 'hsl(var(--destructive))',
+44|                                foreground: 'hsl(var(--destructive-foreground))'
+45|                        },
+46|                        border: 'hsl(var(--border))',
+47|                        input: 'hsl(var(--input))',
+48|                        ring: 'hsl(var(--ring))',
+49|                        chart: {
+50|                                '1': 'hsl(var(--chart-1))',
+51|                                '2': 'hsl(var(--chart-2))',
+52|                                '3': 'hsl(var(--chart-3))',
+53|                                '4': 'hsl(var(--chart-4))',
+54|                                '5': 'hsl(var(--chart-5))'
+55|                        }
+56|                },
+57|                keyframes: {
+58|                        'accordion-down': {
+59|                                from: {
+60|                                        height: '0'
+61|                                },
+62|                                to: {
+63|                                        height: 'var(--radix-accordion-content-height)'
+64|                                }
+65|                        },
+66|                        'accordion-up': {
+67|                                from: {
+68|                                        height: 'var(--radix-accordion-content-height)'
+69|                                },
+70|                                to: {
+71|                                        height: '0'
+72|                                }
+73|                        }
+74|                },
+75|                animation: {
+76|                        'accordion-down': 'accordion-down 0.2s ease-out',
+77|                        'accordion-up': 'accordion-up 0.2s ease-out'
+78|                }
+79|        }
+80|  },
+81|  plugins: [require("tailwindcss-animate")],
+82|};
+[End of file]
+Action: file_editor view /app/frontend/src/components/ui/button.jsx
+Observation: [Showing lines 1-49 of 49 total] /app/frontend/src/components/ui/button.jsx:
+1|import * as React from "react"
+2|import { Slot } from "@radix-ui/react-slot"
+3|import { cva } from "class-variance-authority";
+4|
+5|import { cn } from "@/lib/utils"
+6|
+7|const buttonVariants = cva(
+8|  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+9|  {
+10|    variants: {
+11|      variant: {
+12|        default:
+13|          "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+14|        destructive:
+15|          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+16|        outline:
+17|          "border border-input shadow-sm hover:bg-accent hover:text-accent-foreground",
+18|        secondary:
+19|          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
+20|        ghost: "hover:bg-accent hover:text-accent-foreground",
+21|        link: "text-primary underline-offset-4 hover:underline",
+22|      },
+23|      size: {
+24|        default: "h-9 px-4 py-2",
+25|        sm: "h-8 rounded-md px-3 text-xs",
+26|        lg: "h-10 rounded-md px-8",
+27|        icon: "h-9 w-9",
+28|      },
+29|    },
+30|    defaultVariants: {
+31|      variant: "default",
+32|      size: "default",
+33|    },
+34|  }
+35|)
+36|
+37|const Button = React.forwardRef(({ className, variant, size, asChild = false, ...props }, ref) => {
+38|  const Comp = asChild ? Slot : "button"
+39|  return (
+40|    <Comp
+41|      className={cn(buttonVariants({ variant, size, className }))}
+42|      ref={ref}
+43|      {...props} />
+44|  );
+45|})
+46|Button.displayName = "Button"
+47|
+48|export { Button, buttonVariants }
+49|
+[End of file]
+Action: file_editor view /app/frontend/src/components/ui/card.jsx
+Observation: [Showing lines 1-51 of 51 total] /app/frontend/src/components/ui/card.jsx:
+1|import * as React from "react"
+2|
+3|import { cn } from "@/lib/utils"
+4|
+5|const Card = React.forwardRef(({ className, ...props }, ref) => (
+6|  <div
+7|    ref={ref}
+8|    className={cn("rounded-xl border bg-card text-card-foreground shadow", className)}
+9|    {...props} />
+10|))
+11|Card.displayName = "Card"
+12|
+13|const CardHeader = React.forwardRef(({ className, ...props }, ref) => (
+14|  <div
+15|    ref={ref}
+16|    className={cn("flex flex-col space-y-1.5 p-6", className)}
+17|    {...props} />
+18|))
+19|CardHeader.displayName = "CardHeader"
+20|
+21|const CardTitle = React.forwardRef(({ className, ...props }, ref) => (
+22|  <div
+23|    ref={ref}
+24|    className={cn("font-semibold leading-none tracking-tight", className)}
+25|    {...props} />
+26|))
+27|CardTitle.displayName = "CardTitle"
+28|
+29|const CardDescription = React.forwardRef(({ className, ...props }, ref) => (
+30|  <div
+31|    ref={ref}
+32|    className={cn("text-sm text-muted-foreground", className)}
+33|    {...props} />
+34|))
+35|CardDescription.displayName = "CardDescription"
+36|
+37|const CardContent = React.forwardRef(({ className, ...props }, ref) => (
+38|  <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
+39|))
+40|CardContent.displayName = "CardContent"
+41|
+42|const CardFooter = React.forwardRef(({ className, ...props }, ref) => (
+43|  <div
+44|    ref={ref}
+45|    className={cn("flex items-center p-6 pt-0", className)}
+46|    {...props} />
+47|))
+48|CardFooter.displayName = "CardFooter"
+49|
+50|export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
+51|
+[End of file]
+Action: file_editor view /app/frontend/src/components/ui/input.jsx
+Observation: [Showing lines 1-20 of 20 total] /app/frontend/src/components/ui/input.jsx:
+1|import * as React from "react"
+2|
+3|import { cn } from "@/lib/utils"
+4|
+5|const Input = React.forwardRef(({ className, type, ...props }, ref) => {
+6|  return (
+7|    <input
+8|      type={type}
+9|      className={cn(
+10|        "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+11|        className
+12|      )}
+13|      ref={ref}
+14|      {...props} />
+15|  );
+16|})
+17|Input.displayName = "Input"
+18|
+19|export { Input }
+20|
+[End of file]Основа ясна — теперь собираю аналитику на бэкенде и экран исследования на фронтенде.Сначала добавляю вычислительное ядро и API, чтобы интерфейс сразу опирался на реальные проверки.
+Action: apply_patch({"patch": "*** Begin Patch\n*** Add File: /app/backend/research_engine.py\n+from __future__ import annotations\n+\n+from functools import lru_cache\n+from math import gcd, log2\n+from typing import Any, Dict, List\n+\n+\n+def build_primorial_levels(base_primes: List[int], limit: int, number: int | None = None) -> List[Dict[str, Any]]:\n+    levels: List[Dict[str, Any]] = []\n+    primorial = 1\n+    previous = 1\n+\n+    for depth, prime in enumerate(base_primes, start=1):\n+        primorial *= prime\n+        branch_factor = prime if depth == 1 else prime - 1\n+        survivors = [value for value in range(1, min(primorial, 240)) if gcd(value, primorial) == 1][:12]\n+        level: Dict[str, Any] = {\n+            \"depth\": depth,\n+            \"prime\": prime,\n+            \"primorial\": primorial,\n+            \"branchFactor\": branch_factor,\n+            \"sampleSurvivors\": survivors,\n+            \"survivorDensity\": round(totient(primorial) / primorial, 6),\n+        }\n+\n+        if number is not None:\n+            residue = number % primorial\n+            previous_residue = number % previous\n+            level[\"address\"] = {\n+                \"residue\": residue,\n+                \"coprime\": gcd(number, primorial) == 1,\n+                \"branchIndex\": ((residue - previous_residue) // previous) % prime,\n+            }\n+\n+        levels.append(level)\n+        previous = primorial\n+\n+    return levels\n+\n+\n+def totient(number: int) -> int:\n+    result = number\n+    factor = 2\n+    remaining = number\n+\n+    while factor * factor <= remaining:\n+        if remaining % factor == 0:\n+            while remaining % factor == 0:\n+                remaining //= factor\n+            result -= result // factor\n+        factor += 1\n+\n+    if remaining > 1:\n+        result -= result // remaining\n+\n+    return result\n+\n+\n+@lru_cache(maxsize=24)\n+def prime_bundle(limit: int) -> Dict[str, Any]:\n+    if limit < 2:\n+        return {\"flags\": [False] * (limit + 1), \"primes\": []}\n+\n+    flags = [True] * (limit + 1)\n+    flags[0] = False\n+    flags[1] = False\n+\n+    for value in range(2, int(limit**0.5) + 1):\n+        if flags[value]:\n+            start = value * value\n+            flags[start : limit + 1 : value] = [False] * (((limit - start) // value) + 1)\n+\n+    primes = [value for value in range(2, limit + 1) if flags[value]]\n+    return {\"flags\": flags, \"primes\": primes}\n+\n+\n+def factorize(number: int, primes: List[int]) -> List[int]:\n+    remaining = number\n+    factors: List[int] = []\n+\n+    for prime in primes:\n+        if prime * prime > remaining:\n+            break\n+        while remaining % prime == 0:\n+            factors.append(prime)\n+            remaining //= prime\n+\n+    if remaining > 1:\n+        factors.append(remaining)\n+\n+    return factors\n+\n+\n+def binary_profile(number: int) -> Dict[str, Any]:\n+    bits = format(number, \"b\")\n+    zero_runs: List[int] = []\n+    current_run = 0\n+\n+    for bit in bits:\n+        if bit == \"0\":\n+            current_run += 1\n+        elif current_run:\n+            zero_runs.append(current_run)\n+            current_run = 0\n+\n+    if current_run:\n+        zero_runs.append(current_run)\n+\n+    return {\n+        \"bits\": bits,\n+        \"bitLength\": len(bits),\n+        \"ones\": bits.count(\"1\"),\n+        \"zeroRuns\": zero_runs,\n+    }\n+\n+\n+def hamming_similarity(left: str, right: str) -> float:\n+    width = max(len(left), len(right))\n+    padded_left = left.zfill(width)\n+    padded_right = right.zfill(width)\n+    matches = sum(a == b for a, b in zip(padded_left, padded_right))\n+    return round(matches / width, 4) if width else 1.0\n+\n+\n+def closest_power_of_two(number: int) -> Dict[str, Any]:\n+    if number <= 1:\n+        return {\"power\": 1, \"exponent\": 0, \"distance\": abs(number - 1)}\n+\n+    exponent = round(log2(number))\n+    power = 2**exponent\n+    return {\"power\": power, \"exponent\": exponent, \"distance\": abs(power - number)}\n+\n+\n+def generate_formula_sequence(config: Dict[str, Any], prime_flags: List[bool], base_primes: List[int]) -> List[Dict[str, Any]]:\n+    start_value = max(1, int(config.get(\"startValue\", 4)))\n+    multiplier = max(2, int(config.get(\"multiplier\", 8)))\n+    signed_offsets = config.get(\"signedOffsets\") or [2, -2]\n+    steps = max(1, min(48, int(config.get(\"steps\", 24))))\n+    limit = int(config.get(\"limit\", len(prime_flags) - 1))\n+\n+    sequence: List[Dict[str, Any]] = []\n+    deepest_primorial = 1\n+    for prime in base_primes:\n+        deepest_primorial *= prime\n+\n+    for index in range(steps):\n+        base_term = start_value * (multiplier**index)\n+        offset = int(signed_offsets[index % len(signed_offsets)])\n+        candidate = base_term + offset\n+        in_range = 2 <= candidate <= limit\n+        is_prime = in_range and prime_flags[candidate]\n+        cycle_anchor = (candidate // deepest_primorial) * deepest_primorial\n+        residue = candidate % deepest_primorial\n+        mirror_value = cycle_anchor + ((deepest_primorial - residue) % deepest_primorial)\n+        sequence.append(\n+            {\n+                \"index\": index,\n+                \"baseTerm\": base_term,\n+                \"offset\": offset,\n+                \"candidate\": candidate,\n+                \"inRange\": in_range,\n+                \"isPrime\": is_prime,\n+                \"binary\": format(candidate, \"b\"),\n+                \"residue\": residue,\n+                \"mirror\": mirror_value,\n+            }\n+        )\n+\n+    return sequence\n+\n+\n+def build_snapshot(config: Dict[str, Any]) -> Dict[str, Any]:\n+    limit = max(200, min(50000, int(config.get(\"limit\", 12000))))\n+    base_primes = [int(value) for value in (config.get(\"basePrimes\") or [2, 3, 5, 7, 11])]\n+    bundle = prime_bundle(limit)\n+    primes = bundle[\"primes\"]\n+    prime_flags = bundle[\"flags\"]\n+    formula = generate_formula_sequence({**config, \"limit\": limit}, prime_flags, base_primes)\n+\n+    in_range_candidates = [item for item in formula if item[\"inRange\"]]\n+    hit_candidates = [item for item in in_range_candidates if item[\"isPrime\"]]\n+    candidate_set = {item[\"candidate\"] for item in in_range_candidates}\n+    cumulative_hits = 0\n+    cumulative_curve: List[Dict[str, Any]] = []\n+\n+    for position, item in enumerate(in_range_candidates, start=1):\n+        cumulative_hits += 1 if item[\"isPrime\"] else 0\n+        cumulative_curve.append(\n+            {\n+                \"step\": position,\n+                \"precision\": round((cumulative_hits / position) * 100, 2),\n+                \"candidate\": item[\"candidate\"],\n+            }\n+        )\n+\n+    prime_sample = [\n+        {\n+            \"number\": prime,\n+            \"binary\": format(prime, \"b\"),\n+            \"inFormula\": prime in candidate_set,\n+        }\n+        for prime in primes[:80]\n+    ]\n+\n+    coverage = round((len(hit_candidates) / len(primes)) * 100, 2) if primes else 0\n+    precision = round((len(hit_candidates) / len(in_range_candidates)) * 100, 2) if in_range_candidates else 0\n+    deepest_primorial = 1\n+    for prime in base_primes:\n+        deepest_primorial *= prime\n+\n+    notes = [\n+        f\"\u0422\u043e\u0447\u043d\u043e\u0441\u0442\u044c \u0442\u0435\u043a\u0443\u0449\u0435\u0439 \u0444\u043e\u0440\u043c\u0443\u043b\u044b: {precision}% \u043f\u043e {len(in_range_candidates)} \u043a\u0430\u043d\u0434\u0438\u0434\u0430\u0442\u0430\u043c \u0432 \u0434\u0438\u0430\u043f\u0430\u0437\u043e\u043d\u0435.\",\n+        f\"\u041f\u043e\u043a\u0440\u044b\u0442\u0438\u0435 \u043c\u043d\u043e\u0436\u0435\u0441\u0442\u0432\u0430 \u043f\u0440\u043e\u0441\u0442\u044b\u0445 \u0434\u043e {limit}: {coverage}%.\",\n+        f\"\u0413\u043b\u0443\u0431\u043e\u0447\u0430\u0439\u0448\u0438\u0439 \u043f\u0440\u0438\u043c\u043e\u0440\u0438\u0430\u043b\u044c\u043d\u044b\u0439 \u0446\u0438\u043a\u043b \u0432 \u0430\u043d\u0430\u043b\u0438\u0437\u0435: {deepest_primorial}.\",\n+    ]\n+\n+    if hit_candidates:\n+        best = hit_candidates[0]\n+        notes.append(\n+            f\"\u041f\u0435\u0440\u0432\u043e\u0435 \u043f\u043e\u043f\u0430\u0434\u0430\u043d\u0438\u0435 \u0444\u043e\u0440\u043c\u0443\u043b\u044b \u0432 \u043f\u0440\u043e\u0441\u0442\u043e\u0435 \u0447\u0438\u0441\u043b\u043e: \u0448\u0430\u0433 {best['index'] + 1}, \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435 {best['candidate']}.\"\n+        )\n+    else:\n+        notes.append(\"\u0412 \u0442\u0435\u043a\u0443\u0449\u0435\u0439 \u043a\u043e\u043d\u0444\u0438\u0433\u0443\u0440\u0430\u0446\u0438\u0438 \u0444\u043e\u0440\u043c\u0443\u043b\u0430 \u043f\u043e\u043a\u0430 \u043d\u0435 \u043f\u043e\u043f\u0430\u043b\u0430 \u0432 \u043f\u0440\u043e\u0441\u0442\u044b\u0435 \u0447\u0438\u0441\u043b\u0430 \u0432 \u0432\u0438\u0434\u0438\u043c\u043e\u043c \u0434\u0438\u0430\u043f\u0430\u0437\u043e\u043d\u0435.\")\n+\n+    return {\n+        \"config\": {\n+            \"limit\": limit,\n+            \"basePrimes\": base_primes,\n+            \"startValue\": config.get(\"startValue\", 4),\n+            \"multiplier\": config.get(\"multiplier\", 8),\n+            \"signedOffsets\": config.get(\"signedOffsets\") or [2, -2],\n+            \"steps\": config.get(\"steps\", 24),\n+        },\n+        \"summary\": {\n+            \"primeCount\": len(primes),\n+            \"formulaCandidates\": len(in_range_candidates),\n+            \"formulaHits\": len(hit_candidates),\n+            \"precision\": precision,\n+            \"coverage\": coverage,\n+            \"missedPrimeCount\": max(0, len(primes) - len(hit_candidates)),\n+        },\n+        \"primorialLevels\": build_primorial_levels(base_primes, limit),\n+        \"formulaSequence\": formula,\n+        \"primeSample\": prime_sample,\n+        \"hitCurve\": cumulative_curve,\n+        \"distribution\": [\n+            {\n+                \"number\": item[\"candidate\"],\n+                \"value\": 1 if item[\"isPrime\"] else 0,\n+                \"type\": \"formula\",\n+            }\n+            for item in in_range_candidates\n+        ]\n+        + [{\"number\": prime, \"value\": 1, \"type\": \"prime\"} for prime in primes[:150]],\n+        \"notes\": notes,\n+    }\n+\n+\n+def analyze_number(number: int, base_primes: List[int], config: Dict[str, Any]) -> Dict[str, Any]:\n+    limit = max(5000, min(100000, max(number * 2, int(config.get(\"limit\", 12000)))))\n+    bundle = prime_bundle(limit)\n+    prime_flags = bundle[\"flags\"]\n+    primes = bundle[\"primes\"]\n+    profile = binary_profile(number)\n+    is_prime = prime_flags[number] if number < len(prime_flags) else len(factorize(number, primes)) == 1\n+    levels = build_primorial_levels(base_primes, limit, number=number)\n+    deepest_primorial = levels[-1][\"primorial\"] if levels else 1\n+    residue = number % deepest_primorial\n+    mirror_value = (number // deepest_primorial) * deepest_primorial + ((deepest_primorial - residue) % deepest_primorial)\n+    mirror_bits = format(mirror_value, \"b\")\n+\n+    candidates = generate_formula_sequence({**config, \"limit\": limit}, prime_flags, base_primes)\n+    nearest_formula = min(candidates, key=lambda item: abs(item[\"candidate\"] - number))\n+    factors = [] if is_prime else factorize(number, primes)\n+\n+    return {\n+        \"number\": number,\n+        \"isPrime\": is_prime,\n+        \"binaryProfile\": {\n+            **profile,\n+            \"oneDensity\": round(profile[\"ones\"] / profile[\"bitLength\"], 4),\n+        },\n+        \"factors\": factors,\n+        \"closestPowerOfTwo\": closest_power_of_two(number),\n+        \"primorialPath\": levels,\n+        \"mirror\": {\n+            \"primorial\": deepest_primorial,\n+            \"value\": mirror_value,\n+            \"binary\": mirror_bits,\n+            \"hammingSimilarity\": hamming_similarity(profile[\"bits\"], mirror_bits),\n+        },\n+        \"nearestFormulaCandidate\": {\n+            \"candidate\": nearest_formula[\"candidate\"],\n+            \"distance\": abs(nearest_formula[\"candidate\"] - number),\n+            \"offset\": nearest_formula[\"offset\"],\n+            \"step\": nearest_formula[\"index\"] + 1,\n+        },\n+        \"researchFlags\": {\n+            \"survivesDeepestPrimorial\": gcd(number, deepest_primorial) == 1,\n+            \"matchesFormulaExactly\": nearest_formula[\"candidate\"] == number,\n+        },\n+    }\n*** Add File: /app/backend/server.py\n+from fastapi import FastAPI, APIRouter\n+from dotenv import load_dotenv\n+from starlette.middleware.cors import CORSMiddleware\n+from motor.motor_asyncio import AsyncIOMotorClient\n+import os\n+import logging\n+from pathlib import Path\n+from pydantic import BaseModel, Field, ConfigDict\n+from typing import List\n+import uuid\n+from datetime import datetime, timezone\n+\n+from research_engine import analyze_number, build_snapshot\n+\n+\n+ROOT_DIR = Path(__file__).parent\n+load_dotenv(ROOT_DIR / '.env')\n+\n+mongo_url = os.environ['MONGO_URL']\n+client = AsyncIOMotorClient(mongo_url)\n+db = client[os.environ['DB_NAME']]\n+\n+app = FastAPI()\n+api_router = APIRouter(prefix=\"/api\")\n+\n+\n+class StatusCheck(BaseModel):\n+    model_config = ConfigDict(extra=\"ignore\")\n+\n+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))\n+    client_name: str\n+    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))\n+\n+\n+class StatusCheckCreate(BaseModel):\n+    client_name: str\n+\n+\n+class ResearchSnapshotRequest(BaseModel):\n+    limit: int = 12000\n+    startValue: int = 4\n+    multiplier: int = 8\n+    signedOffsets: List[int] = Field(default_factory=lambda: [2, -2])\n+    steps: int = 24\n+    basePrimes: List[int] = Field(default_factory=lambda: [2, 3, 5, 7, 11])\n+\n+\n+@api_router.get(\"/\")\n+async def root():\n+    return {\"message\": \"Number Resonance API\"}\n+\n+\n+@api_router.post(\"/status\", response_model=StatusCheck)\n+async def create_status_check(input: StatusCheckCreate):\n+    status_dict = input.model_dump()\n+    status_obj = StatusCheck(**status_dict)\n+    doc = status_obj.model_dump()\n+    doc['timestamp'] = doc['timestamp'].isoformat()\n+    _ = await db.status_checks.insert_one(doc)\n+    return status_obj\n+\n+\n+@api_router.get(\"/status\", response_model=List[StatusCheck])\n+async def get_status_checks():\n+    status_checks = await db.status_checks.find({}, {\"_id\": 0}).to_list(1000)\n+\n+    for check in status_checks:\n+        if isinstance(check['timestamp'], str):\n+            check['timestamp'] = datetime.fromisoformat(check['timestamp'])\n+\n+    return status_checks\n+\n+\n+@api_router.post(\"/research/snapshot\")\n+async def research_snapshot(input: ResearchSnapshotRequest):\n+    return build_snapshot(input.model_dump())\n+\n+\n+@api_router.get(\"/research/number/{number}\")\n+async def research_number(number: int, limit: int = 12000):\n+    config = ResearchSnapshotRequest(limit=limit)\n+    return analyze_number(number, config.basePrimes, config.model_dump())\n+\n+\n+app.include_router(api_router)\n+\n+app.add_middleware(\n+    CORSMiddleware,\n+    allow_credentials=True,\n+    allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),\n+    allow_methods=[\"*\"],\n+    allow_headers=[\"*\"],\n+)\n+\n+logging.basicConfig(\n+    level=logging.INFO,\n+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'\n+)\n+logger = logging.getLogger(__name__)\n+\n+\n+@app.on_event(\"shutdown\")\n+async def shutdown_db_client():\n+    client.close()\n*** End Patch", "run_lint": false})
+Observation: Create File target already exists: /app/backend/server.pyБэкенд собран — быстро проверяю код и затем возьмусь за исследовательский интерфейс.
+Action: file_editor view /app/backend/server.py
+Observation: [Showing lines 1-107 of 107 total] /app/backend/server.py:
+1|from fastapi import FastAPI, APIRouter
+2|from dotenv import load_dotenv
+3|from starlette.middleware.cors import CORSMiddleware
+4|from motor.motor_asyncio import AsyncIOMotorClient
+5|import os
+6|import logging
+7|from pathlib import Path
+8|from pydantic import BaseModel, Field, ConfigDict
+9|from typing import List
+10|import uuid
+11|from datetime import datetime, timezone
+12|
+13|from research_engine import analyze_number, build_snapshot
+14|
+15|
+16|ROOT_DIR = Path(__file__).parent
+17|load_dotenv(ROOT_DIR / '.env')
+18|
+19|# MongoDB connection
+20|mongo_url = os.environ['MONGO_URL']
+21|client = AsyncIOMotorClient(mongo_url)
+22|db = client[os.environ['DB_NAME']]
+23|
+24|# Create the main app without a prefix
+25|app = FastAPI()
+26|
+27|# Create a router with the /api prefix
+28|api_router = APIRouter(prefix="/api")
+29|
+30|
+31|# Define Models
+32|class StatusCheck(BaseModel):
+33|    model_config = ConfigDict(extra="ignore")  # Ignore MongoDB's _id field
+34|    
+35|    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+36|    client_name: str
+37|    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+38|
+39|class StatusCheckCreate(BaseModel):
+40|    client_name: str
+41|
+42|@api_router.get("/")
+43|async def root():
+44|    return {"message": "Number Resonance API"}
+45|
+46|@api_router.post("/status", response_model=StatusCheck)
+47|async def create_status_check(input: StatusCheckCreate):
+48|    status_dict = input.model_dump()
+49|    status_obj = StatusCheck(**status_dict)
+50|    
+51|    # Convert to dict and serialize datetime to ISO string for MongoDB
+52|    doc = status_obj.model_dump()
+53|    doc['timestamp'] = doc['timestamp'].isoformat()
+54|    
+55|    _ = await db.status_checks.insert_one(doc)
+56|    return status_obj
+57|
+58|@api_router.get("/status", response_model=List[StatusCheck])
+59|async def get_status_checks():
+60|    status_checks = await db.status_checks.find({}, {"_id": 0}).to_list(1000)
+61|
+62|    for check in status_checks:
+63|        if isinstance(check['timestamp'], str):
+64|            check['timestamp'] = datetime.fromisoformat(check['timestamp'])
+65|
+66|    return status_checks
+67|
+68|
+69|class ResearchSnapshotRequest(BaseModel):
+70|    limit: int = 12000
+71|    startValue: int = 4
+72|    multiplier: int = 8
+73|    signedOffsets: List[int] = Field(default_factory=lambda: [2, -2])
+74|    steps: int = 24
+75|    basePrimes: List[int] = Field(default_factory=lambda: [2, 3, 5, 7, 11])
+76|
+77|
+78|@api_router.post("/research/snapshot")
+79|async def research_snapshot(input: ResearchSnapshotRequest):
+80|    return build_snapshot(input.model_dump())
+81|
+82|
+83|@api_router.get("/research/number/{number}")
+84|async def research_number(number: int, limit: int = 12000):
+85|    config = ResearchSnapshotRequest(limit=limit)
+86|    return analyze_number(number, config.basePrimes, config.model_dump())
+87|
+88|app.include_router(api_router)
+89|
+90|app.add_middleware(
+91|    CORSMiddleware,
+92|    allow_credentials=True,
+93|    allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
+94|    allow_methods=["*"],
+95|    allow_headers=["*"],
+96|)
+97|
+98|# Configure logging
+99|logging.basicConfig(
+100|    level=logging.INFO,
+101|    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+102|)
+103|logger = logging.getLogger(__name__)
+104|
+105|@app.on_event("shutdown")
+106|async def shutdown_db_client():
+107|    client.close()
+[End of file]
+Action: file_editor view /app/backend/research_engine.py
+Observation: [Showing lines 1-302 of 302 total] /app/backend/research_engine.py:
+1|from __future__ import annotations
+2|
+3|from functools import lru_cache
+4|from math import gcd, log2
+5|from typing import Any, Dict, List
+6|
+7|
+8|def build_primorial_levels(base_primes: List[int], limit: int, number: int | None = None) -> List[Dict[str, Any]]:
+9|    levels: List[Dict[str, Any]] = []
+10|    primorial = 1
+11|    previous = 1
+12|
+13|    for depth, prime in enumerate(base_primes, start=1):
+14|        primorial *= prime
+15|        branch_factor = prime if depth == 1 else prime - 1
+16|        survivors = [value for value in range(1, min(primorial, 240)) if gcd(value, primorial) == 1][:12]
+17|        level: Dict[str, Any] = {
+18|            "depth": depth,
+19|            "prime": prime,
+20|            "primorial": primorial,
+21|            "branchFactor": branch_factor,
+22|            "sampleSurvivors": survivors,
+23|            "survivorDensity": round(totient(primorial) / primorial, 6),
+24|        }
+25|
+26|        if number is not None:
+27|            residue = number % primorial
+28|            previous_residue = number % previous
+29|            level["address"] = {
+30|                "residue": residue,
+31|                "coprime": gcd(number, primorial) == 1,
+32|                "branchIndex": ((residue - previous_residue) // previous) % prime,
+33|            }
+34|
+35|        levels.append(level)
+36|        previous = primorial
+37|
+38|    return levels
+39|
+40|
+41|def totient(number: int) -> int:
+42|    result = number
+43|    factor = 2
+44|    remaining = number
+45|
+46|    while factor * factor <= remaining:
+47|        if remaining % factor == 0:
+48|            while remaining % factor == 0:
+49|                remaining //= factor
+50|            result -= result // factor
+51|        factor += 1
+52|
+53|    if remaining > 1:
+54|        result -= result // remaining
+55|
+56|    return result
+57|
+58|
+59|@lru_cache(maxsize=24)
+60|def prime_bundle(limit: int) -> Dict[str, Any]:
+61|    if limit < 2:
+62|        return {"flags": [False] * (limit + 1), "primes": []}
+63|
+64|    flags = [True] * (limit + 1)
+65|    flags[0] = False
+66|    flags[1] = False
+67|
+68|    for value in range(2, int(limit**0.5) + 1):
+69|        if flags[value]:
+70|            start = value * value
+71|            flags[start : limit + 1 : value] = [False] * (((limit - start) // value) + 1)
+72|
+73|    primes = [value for value in range(2, limit + 1) if flags[value]]
+74|    return {"flags": flags, "primes": primes}
+75|
+76|
+77|def factorize(number: int, primes: List[int]) -> List[int]:
+78|    remaining = number
+79|    factors: List[int] = []
+80|
+81|    for prime in primes:
+82|        if prime * prime > remaining:
+83|            break
+84|        while remaining % prime == 0:
+85|            factors.append(prime)
+86|            remaining //= prime
+87|
+88|    if remaining > 1:
+89|        factors.append(remaining)
+90|
+91|    return factors
+92|
+93|
+94|def binary_profile(number: int) -> Dict[str, Any]:
+95|    bits = format(number, "b")
+96|    zero_runs: List[int] = []
+97|    current_run = 0
+98|
+99|    for bit in bits:
+100|        if bit == "0":
+101|            current_run += 1
+102|        elif current_run:
+103|            zero_runs.append(current_run)
+104|            current_run = 0
+105|
+106|    if current_run:
+107|        zero_runs.append(current_run)
+108|
+109|    return {
+110|        "bits": bits,
+111|        "bitLength": len(bits),
+112|        "ones": bits.count("1"),
+113|        "zeroRuns": zero_runs,
+114|    }
+115|
+116|
+117|def hamming_similarity(left: str, right: str) -> float:
+118|    width = max(len(left), len(right))
+119|    padded_left = left.zfill(width)
+120|    padded_right = right.zfill(width)
+121|    matches = sum(a == b for a, b in zip(padded_left, padded_right))
+122|    return round(matches / width, 4) if width else 1.0
+123|
+124|
+125|def closest_power_of_two(number: int) -> Dict[str, Any]:
+126|    if number <= 1:
+127|        return {"power": 1, "exponent": 0, "distance": abs(number - 1)}
+128|
+129|    exponent = round(log2(number))
+130|    power = 2**exponent
+131|    return {"power": power, "exponent": exponent, "distance": abs(power - number)}
+132|
+133|
+134|def generate_formula_sequence(config: Dict[str, Any], prime_flags: List[bool], base_primes: List[int]) -> List[Dict[str, Any]]:
+135|    start_value = max(1, int(config.get("startValue", 4)))
+136|    multiplier = max(2, int(config.get("multiplier", 8)))
+137|    signed_offsets = config.get("signedOffsets") or [2, -2]
+138|    steps = max(1, min(48, int(config.get("steps", 24))))
+139|    limit = int(config.get("limit", len(prime_flags) - 1))
+140|
+141|    sequence: List[Dict[str, Any]] = []
+142|    deepest_primorial = 1
+143|    for prime in base_primes:
+144|        deepest_primorial *= prime
+145|
+146|    for index in range(steps):
+147|        base_term = start_value * (multiplier**index)
+148|        offset = int(signed_offsets[index % len(signed_offsets)])
+149|        candidate = base_term + offset
+150|        in_range = 2 <= candidate <= limit
+151|        is_prime = in_range and prime_flags[candidate]
+152|        cycle_anchor = (candidate // deepest_primorial) * deepest_primorial
+153|        residue = candidate % deepest_primorial
+154|        mirror_value = cycle_anchor + ((deepest_primorial - residue) % deepest_primorial)
+155|        sequence.append(
+156|            {
+157|                "index": index,
+158|                "baseTerm": base_term,
+159|                "offset": offset,
+160|                "candidate": candidate,
+161|                "inRange": in_range,
+162|                "isPrime": is_prime,
+163|                "binary": format(candidate, "b"),
+164|                "residue": residue,
+165|                "mirror": mirror_value,
+166|            }
+167|        )
+168|
+169|    return sequence
+170|
+171|
+172|def build_snapshot(config: Dict[str, Any]) -> Dict[str, Any]:
+173|    limit = max(200, min(50000, int(config.get("limit", 12000))))
+174|    base_primes = [int(value) for value in (config.get("basePrimes") or [2, 3, 5, 7, 11])]
+175|    bundle = prime_bundle(limit)
+176|    primes = bundle["primes"]
+177|    prime_flags = bundle["flags"]
+178|    formula = generate_formula_sequence({**config, "limit": limit}, prime_flags, base_primes)
+179|
+180|    in_range_candidates = [item for item in formula if item["inRange"]]
+181|    hit_candidates = [item for item in in_range_candidates if item["isPrime"]]
+182|    candidate_set = {item["candidate"] for item in in_range_candidates}
+183|    cumulative_hits = 0
+184|    cumulative_curve: List[Dict[str, Any]] = []
+185|
+186|    for position, item in enumerate(in_range_candidates, start=1):
+187|        cumulative_hits += 1 if item["isPrime"] else 0
+188|        cumulative_curve.append(
+189|            {
+190|                "step": position,
+191|                "precision": round((cumulative_hits / position) * 100, 2),
+192|                "candidate": item["candidate"],
+193|            }
+194|        )
+195|
+196|    prime_sample = [
+197|        {
+198|            "number": prime,
+199|            "binary": format(prime, "b"),
+200|            "inFormula": prime in candidate_set,
+201|        }
+202|        for prime in primes[:80]
+203|    ]
+204|
+205|    coverage = round((len(hit_candidates) / len(primes)) * 100, 2) if primes else 0
+206|    precision = round((len(hit_candidates) / len(in_range_candidates)) * 100, 2) if in_range_candidates else 0
+207|    deepest_primorial = 1
+208|    for prime in base_primes:
+209|        deepest_primorial *= prime
+210|
+211|    notes = [
+212|        f"Точность текущей формулы: {precision}% по {len(in_range_candidates)} кандидатам в диапазоне.",
+213|        f"Покрытие множества простых до {limit}: {coverage}%.",
+214|        f"Глубочайший примориальный цикл в анализе: {deepest_primorial}.",
+215|    ]
+216|
+217|    if hit_candidates:
+218|        best = hit_candidates[0]
+219|        notes.append(
+220|            f"Первое попадание формулы в простое число: шаг {best['index'] + 1}, значение {best['candidate']}."
+221|        )
+222|    else:
+223|        notes.append("В текущей конфигурации формула пока не попала в простые числа в видимом диапазоне.")
+224|
+225|    return {
+226|        "config": {
+227|            "limit": limit,
+228|            "basePrimes": base_primes,
+229|            "startValue": config.get("startValue", 4),
+230|            "multiplier": config.get("multiplier", 8),
+231|            "signedOffsets": config.get("signedOffsets") or [2, -2],
+232|            "steps": config.get("steps", 24),
+233|        },
+234|        "summary": {
+235|            "primeCount": len(primes),
+236|            "formulaCandidates": len(in_range_candidates),
+237|            "formulaHits": len(hit_candidates),
+238|            "precision": precision,
+239|            "coverage": coverage,
+240|            "missedPrimeCount": max(0, len(primes) - len(hit_candidates)),
+241|        },
+242|        "primorialLevels": build_primorial_levels(base_primes, limit),
+243|        "formulaSequence": formula,
+244|        "primeSample": prime_sample,
+245|        "hitCurve": cumulative_curve,
+246|        "distribution": [
+247|            {
+248|                "number": item["candidate"],
+249|                "value": 1 if item["isPrime"] else 0,
+250|                "type": "formula",
+251|            }
+252|            for item in in_range_candidates
+253|        ]
+254|        + [{"number": prime, "value": 1, "type": "prime"} for prime in primes[:150]],
+255|        "notes": notes,
+256|    }
+257|
+258|
+259|def analyze_number(number: int, base_primes: List[int], config: Dict[str, Any]) -> Dict[str, Any]:
+260|    limit = max(5000, min(100000, max(number * 2, int(config.get("limit", 12000)))))
+261|    bundle = prime_bundle(limit)
+262|    prime_flags = bundle["flags"]
+263|    primes = bundle["primes"]
+264|    profile = binary_profile(number)
+265|    is_prime = prime_flags[number] if number < len(prime_flags) else len(factorize(number, primes)) == 1
+266|    levels = build_primorial_levels(base_primes, limit, number=number)
+267|    deepest_primorial = levels[-1]["primorial"] if levels else 1
+268|    residue = number % deepest_primorial
+269|    mirror_value = (number // deepest_primorial) * deepest_primorial + ((deepest_primorial - residue) % deepest_primorial)
+270|    mirror_bits = format(mirror_value, "b")
+271|
+272|    candidates = generate_formula_sequence({**config, "limit": limit}, prime_flags, base_primes)
+273|    nearest_formula = min(candidates, key=lambda item: abs(item["candidate"] - number))
+274|    factors = [] if is_prime else factorize(number, primes)
+275|
+276|    return {
+277|        "number": number,
+278|        "isPrime": is_prime,
+279|        "binaryProfile": {
+280|            **profile,
+281|            "oneDensity": round(profile["ones"] / profile["bitLength"], 4),
+282|        },
+283|        "factors": factors,
+284|        "closestPowerOfTwo": closest_power_of_two(number),
+285|        "primorialPath": levels,
+286|        "mirror": {
+287|            "primorial": deepest_primorial,
+288|            "value": mirror_value,
+289|            "binary": mirror_bits,
+290|            "hammingSimilarity": hamming_similarity(profile["bits"], mirror_bits),
+291|        },
+292|        "nearestFormulaCandidate": {
+293|            "candidate": nearest_formula["candidate"],
+294|            "distance": abs(nearest_formula["candidate"] - number),
+295|            "offset": nearest_formula["offset"],
+296|            "step": nearest_formula["index"] + 1,
+297|        },
+298|        "researchFlags": {
+299|            "survivesDeepestPrimorial": gcd(number, deepest_primorial) == 1,
+300|            "matchesFormulaExactly": nearest_formula["candidate"] == number,
+301|        },
+302|    }
+[End of file]
+Action: file_editor view /app/frontend/src/index.js
+Observation: [Showing lines 1-12 of 12 total] /app/frontend/src/index.js:
+1|import React from "react";
+2|import ReactDOM from "react-dom/client";
+3|import "@/index.css";
+4|import App from "@/App";
+5|
+6|const root = ReactDOM.createRoot(document.getElementById("root"));
+7|root.render(
+8|  <React.StrictMode>
+9|    <App />
+10|  </React.StrictMode>,
+11|);
+12|
+[End of file]Собираю фронтенд по секциям: каркас, страницы, затем графики и формы.
+Action: file_editor view /app/frontend/src/components/ui/sonner.jsx
+Observation: [Showing lines 1-29 of 29 total] /app/frontend/src/components/ui/sonner.jsx:
+1|import { useTheme } from "next-themes"
+2|import { Toaster as Sonner, toast } from "sonner"
+3|
+4|const Toaster = ({
+5|  ...props
+6|}) => {
+7|  const { theme = "system" } = useTheme()
+8|
+9|  return (
+10|    <Sonner
+11|      theme={theme}
+12|      className="toaster group"
+13|      toastOptions={{
+14|        classNames: {
+15|          toast:
+16|            "group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:border-border group-[.toaster]:shadow-lg",
+17|          description: "group-[.toast]:text-muted-foreground",
+18|          actionButton:
+19|            "group-[.toast]:bg-primary group-[.toast]:text-primary-foreground",
+20|          cancelButton:
+21|            "group-[.toast]:bg-muted group-[.toast]:text-muted-foreground",
+22|        },
+23|      }}
+24|      {...props} />
+25|  );
+26|}
+27|
+28|export { Toaster, toast }
+29|
+[End of file]
+Action: file_editor view /app/frontend/src/components/ui/badge.jsx
+Observation: [Showing lines 1-35 of 35 total] /app/frontend/src/components/ui/badge.jsx:
+1|import * as React from "react"
+2|import { cva } from "class-variance-authority";
+3|
+4|import { cn } from "@/lib/utils"
+5|
+6|const badgeVariants = cva(
+7|  "inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+8|  {
+9|    variants: {
+10|      variant: {
+11|        default:
+12|          "border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80",
+13|        secondary:
+14|          "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
+15|        destructive:
+16|          "border-transparent bg-destructive text-destructive-foreground shadow hover:bg-destructive/80",
+17|        outline: "text-foreground",
+18|      },
+19|    },
+20|    defaultVariants: {
+21|      variant: "default",
+22|    },
+23|  }
+24|)
+25|
+26|function Badge({
+27|  className,
+28|  variant,
+29|  ...props
+30|}) {
+31|  return (<div className={cn(badgeVariants({ variant }), className)} {...props} />);
+32|}
+33|
+34|export { Badge, badgeVariants }
+35|
+[End of file]
+Action: file_editor view /app/frontend/src/components/ui/slider.jsx
+Observation: [Showing lines 1-22 of 22 total] /app/frontend/src/components/ui/slider.jsx:
+1|import * as React from "react"
+2|import * as SliderPrimitive from "@radix-ui/react-slider"
+3|
+4|import { cn } from "@/lib/utils"
+5|
+6|const Slider = React.forwardRef(({ className, ...props }, ref) => (
+7|  <SliderPrimitive.Root
+8|    ref={ref}
+9|    className={cn("relative flex w-full touch-none select-none items-center", className)}
+10|    {...props}>
+11|    <SliderPrimitive.Track
+12|      className="relative h-1.5 w-full grow overflow-hidden rounded-full bg-primary/20">
+13|      <SliderPrimitive.Range className="absolute h-full bg-primary" />
+14|    </SliderPrimitive.Track>
+15|    <SliderPrimitive.Thumb
+16|      className="block h-4 w-4 rounded-full border border-primary/50 bg-background shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" />
+17|  </SliderPrimitive.Root>
+18|))
+19|Slider.displayName = SliderPrimitive.Root.displayName
+20|
+21|export { Slider }
+22|
+[End of file]
+Action: file_editor view /app/frontend/src/components/ui/table.jsx
+Observation: [Showing lines 1-87 of 87 total] /app/frontend/src/components/ui/table.jsx:
+1|import * as React from "react"
+2|
+3|import { cn } from "@/lib/utils"
+4|
+5|const Table = React.forwardRef(({ className, ...props }, ref) => (
+6|  <div className="relative w-full overflow-auto">
+7|    <table
+8|      ref={ref}
+9|      className={cn("w-full caption-bottom text-sm", className)}
+10|      {...props} />
+11|  </div>
+12|))
+13|Table.displayName = "Table"
+14|
+15|const TableHeader = React.forwardRef(({ className, ...props }, ref) => (
+16|  <thead ref={ref} className={cn("[&_tr]:border-b", className)} {...props} />
+17|))
+18|TableHeader.displayName = "TableHeader"
+19|
+20|const TableBody = React.forwardRef(({ className, ...props }, ref) => (
+21|  <tbody
+22|    ref={ref}
+23|    className={cn("[&_tr:last-child]:border-0", className)}
+24|    {...props} />
+25|))
+26|TableBody.displayName = "TableBody"
+27|
+28|const TableFooter = React.forwardRef(({ className, ...props }, ref) => (
+29|  <tfoot
+30|    ref={ref}
+31|    className={cn("border-t bg-muted/50 font-medium [&>tr]:last:border-b-0", className)}
+32|    {...props} />
+33|))
+34|TableFooter.displayName = "TableFooter"
+35|
+36|const TableRow = React.forwardRef(({ className, ...props }, ref) => (
+37|  <tr
+38|    ref={ref}
+39|    className={cn(
+40|      "border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",
+41|      className
+42|    )}
+43|    {...props} />
+44|))
+45|TableRow.displayName = "TableRow"
+46|
+47|const TableHead = React.forwardRef(({ className, ...props }, ref) => (
+48|  <th
+49|    ref={ref}
+50|    className={cn(
+51|      "h-10 px-2 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+52|      className
+53|    )}
+54|    {...props} />
+55|))
+56|TableHead.displayName = "TableHead"
+57|
+58|const TableCell = React.forwardRef(({ className, ...props }, ref) => (
+59|  <td
+60|    ref={ref}
+61|    className={cn(
+62|      "p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+63|      className
+64|    )}
+65|    {...props} />
+66|))
+67|TableCell.displayName = "TableCell"
+68|
+69|const TableCaption = React.forwardRef(({ className, ...props }, ref) => (
+70|  <caption
+71|    ref={ref}
+72|    className={cn("mt-4 text-sm text-muted-foreground", className)}
+73|    {...props} />
+74|))
+75|TableCaption.displayName = "TableCaption"
+76|
+77|export {
+78|  Table,
+79|  TableHeader,
+80|  TableBody,
+81|  TableFooter,
+82|  TableHead,
+83|  TableRow,
+84|  TableCell,
+85|  TableCaption,
+86|}
+87|
+[End of file]
+Action: apply_patch({"patch": "*** Begin Patch\n*** Update File: /app/frontend/src/App.js\n@@\n-import { useEffect } from \"react\";\n-import \"@/App.css\";\n-import { BrowserRouter, Routes, Route } from \"react-router-dom\";\n-import axios from \"axios\";\n-\n-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;\n-const API = `${BACKEND_URL}/api`;\n-\n-const Home = () => {\n-  const helloWorldApi = async () => {\n-    try {\n-      const response = await axios.get(`${API}/`);\n-      console.log(response.data.message);\n-    } catch (e) {\n-      console.error(e, `errored out requesting / api`);\n-    }\n-  };\n-\n-  useEffect(() => {\n-    helloWorldApi();\n-  }, []);\n-\n-  return (\n-    <div>\n-      <header className=\"App-header\">\n-        <a\n-          className=\"App-link\"\n-          href=\"https://emergent.sh\"\n-          target=\"_blank\"\n-          rel=\"noopener noreferrer\"\n-        >\n-          <img src=\"https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4\" />\n-        </a>\n-        <p className=\"mt-5\">Building something incredible ~!</p>\n-      </header>\n-    </div>\n-  );\n-};\n-\n-function App() {\n-  return (\n-    <div className=\"App\">\n-      <BrowserRouter>\n-        <Routes>\n-          <Route path=\"/\" element={<Home />}>\n-            <Route index element={<Home />} />\n-          </Route>\n-        </Routes>\n-      </BrowserRouter>\n-    </div>\n-  );\n-}\n-\n-export default App;\n+import { useCallback, useEffect, useState } from \"react\";\n+import { ThemeProvider } from \"next-themes\";\n+import { BrowserRouter, Route, Routes } from \"react-router-dom\";\n+import axios from \"axios\";\n+\n+import \"@/App.css\";\n+import { toast, Toaster } from \"@/components/ui/sonner\";\n+import { ResearchLayout } from \"@/components/ResearchLayout\";\n+import FormulaLabPage from \"@/pages/FormulaLabPage\";\n+import NumberExplorerPage from \"@/pages/NumberExplorerPage\";\n+import OverviewPage from \"@/pages/OverviewPage\";\n+\n+const API = `${process.env.REACT_APP_BACKEND_URL}/api`;\n+\n+const DEFAULT_CONFIG = {\n+  limit: 12000,\n+  startValue: 4,\n+  multiplier: 8,\n+  signedOffsets: [2, -2],\n+  steps: 18,\n+  basePrimes: [2, 3, 5, 7, 11],\n+};\n+\n+export default function App() {\n+  const [config, setConfig] = useState(DEFAULT_CONFIG);\n+  const [snapshot, setSnapshot] = useState(null);\n+  const [snapshotLoading, setSnapshotLoading] = useState(true);\n+  const [numberValue, setNumberValue] = useState(\"2311\");\n+  const [numberResult, setNumberResult] = useState(null);\n+  const [numberLoading, setNumberLoading] = useState(false);\n+\n+  const loadSnapshot = useCallback(async (nextConfig) => {\n+    setSnapshotLoading(true);\n+\n+    try {\n+      const response = await axios.post(`${API}/research/snapshot`, nextConfig);\n+      setSnapshot(response.data);\n+      return response.data;\n+    } catch (error) {\n+      toast.error(\"\u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u043e\u0431\u043d\u043e\u0432\u0438\u0442\u044c \u0438\u0441\u0441\u043b\u0435\u0434\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0443\u044e \u043f\u0430\u043d\u0435\u043b\u044c.\");\n+      throw error;\n+    } finally {\n+      setSnapshotLoading(false);\n+    }\n+  }, []);\n+\n+  const analyzeNumber = useCallback(async (value, limit = config.limit) => {\n+    const normalized = String(value).trim();\n+\n+    if (!normalized || Number.isNaN(Number(normalized))) {\n+      toast.error(\"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043a\u043e\u0440\u0440\u0435\u043a\u0442\u043d\u043e\u0435 \u0447\u0438\u0441\u043b\u043e \u0434\u043b\u044f \u0430\u043d\u0430\u043b\u0438\u0437\u0430.\");\n+      return null;\n+    }\n+\n+    setNumberLoading(true);\n+\n+    try {\n+      const response = await axios.get(`${API}/research/number/${normalized}`, {\n+        params: { limit },\n+      });\n+      setNumberValue(normalized);\n+      setNumberResult(response.data);\n+      return response.data;\n+    } catch (error) {\n+      toast.error(\"\u0427\u0438\u0441\u043b\u043e \u043d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u043f\u0440\u043e\u0432\u0435\u0440\u0438\u0442\u044c \u0447\u0435\u0440\u0435\u0437 \u0438\u0441\u0441\u043b\u0435\u0434\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 API.\");\n+      throw error;\n+    } finally {\n+      setNumberLoading(false);\n+    }\n+  }, [config.limit]);\n+\n+  const applyConfig = useCallback(async (nextConfig) => {\n+    setConfig(nextConfig);\n+    await loadSnapshot(nextConfig);\n+    await analyzeNumber(numberValue, nextConfig.limit);\n+    toast.success(\"\u0424\u043e\u0440\u043c\u0443\u043b\u0430 \u0438 \u043c\u0435\u0442\u0440\u0438\u043a\u0438 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u044b.\");\n+  }, [analyzeNumber, loadSnapshot, numberValue]);\n+\n+  useEffect(() => {\n+    loadSnapshot(DEFAULT_CONFIG);\n+    analyzeNumber(\"2311\", DEFAULT_CONFIG.limit);\n+  }, [analyzeNumber, loadSnapshot]);\n+\n+  return (\n+    <ThemeProvider attribute=\"class\" forcedTheme=\"dark\" enableSystem={false}>\n+      <div className=\"App bg-background text-foreground\" data-testid=\"app-root\">\n+        <BrowserRouter>\n+          <Routes>\n+            <Route\n+              element={\n+                <ResearchLayout\n+                  analyzeNumber={analyzeNumber}\n+                  applyConfig={applyConfig}\n+                  config={config}\n+                  numberLoading={numberLoading}\n+                  numberResult={numberResult}\n+                  numberValue={numberValue}\n+                  setNumberValue={setNumberValue}\n+                  snapshot={snapshot}\n+                  snapshotLoading={snapshotLoading}\n+                />\n+              }\n+            >\n+              <Route index element={<OverviewPage />} />\n+              <Route path=\"/formula-lab\" element={<FormulaLabPage />} />\n+              <Route path=\"/number-explorer\" element={<NumberExplorerPage />} />\n+            </Route>\n+          </Routes>\n+        </BrowserRouter>\n+        <Toaster richColors position=\"top-right\" />\n+      </div>\n+    </ThemeProvider>\n+  );\n+}\n*** Update File: /app/frontend/src/index.js\n@@\n import React from \"react\";\n import ReactDOM from \"react-dom/client\";\n+import \"@fontsource/chivo/700.css\";\n+import \"@fontsource/ibm-plex-sans/400.css\";\n+import \"@fontsource/ibm-plex-sans/500.css\";\n+import \"@fontsource/jetbrains-mono/400.css\";\n import \"@/index.css\";\n import App from \"@/App\";\n*** Update File: /app/frontend/src/App.css\n@@\n-.App-logo {\n-    height: 40vmin;\n-    pointer-events: none;\n-}\n-\n-@media (prefers-reduced-motion: no-preference) {\n-    .App-logo {\n-        animation: App-logo-spin infinite 20s linear;\n-    }\n-}\n-\n-.App-header {\n-    background-color: #0f0f10;\n-    min-height: 100vh;\n-    display: flex;\n-    flex-direction: column;\n-    align-items: center;\n-    justify-content: center;\n-    font-size: calc(10px + 2vmin);\n-    color: white;\n-}\n-\n-.App-link {\n-    color: #61dafb;\n-}\n-\n-@keyframes App-logo-spin {\n-    from {\n-        transform: rotate(0deg);\n-    }\n-    to {\n-        transform: rotate(360deg);\n-    }\n-}\n+.App {\n+    min-height: 100vh;\n+}\n*** Update File: /app/frontend/src/index.css\n@@\n @tailwind base;\n @tailwind components;\n @tailwind utilities;\n \n body {\n-    margin: 0;\n-    font-family:\n-        -apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Roboto\", \"Oxygen\",\n-        \"Ubuntu\", \"Cantarell\", \"Fira Sans\", \"Droid Sans\", \"Helvetica Neue\",\n-        sans-serif;\n+    margin: 0;\n+    font-family: \"IBM Plex Sans\", sans-serif;\n     -webkit-font-smoothing: antialiased;\n     -moz-osx-font-smoothing: grayscale;\n }\n \n code {\n-    font-family:\n-        source-code-pro, Menlo, Monaco, Consolas, \"Courier New\", monospace;\n+    font-family: \"JetBrains Mono\", monospace;\n }\n \n @layer base {\n     :root {\n-        --background: 0 0% 100%;\n-        --foreground: 0 0% 3.9%;\n-        --card: 0 0% 100%;\n-        --card-foreground: 0 0% 3.9%;\n-        --popover: 0 0% 100%;\n-        --popover-foreground: 0 0% 3.9%;\n-        --primary: 0 0% 9%;\n-        --primary-foreground: 0 0% 98%;\n-        --secondary: 0 0% 96.1%;\n-        --secondary-foreground: 0 0% 9%;\n-        --muted: 0 0% 96.1%;\n-        --muted-foreground: 0 0% 45.1%;\n-        --accent: 0 0% 96.1%;\n-        --accent-foreground: 0 0% 9%;\n-        --destructive: 0 84.2% 60.2%;\n-        --destructive-foreground: 0 0% 98%;\n-        --border: 0 0% 89.8%;\n-        --input: 0 0% 89.8%;\n-        --ring: 0 0% 3.9%;\n-        --chart-1: 12 76% 61%;\n-        --chart-2: 173 58% 39%;\n-        --chart-3: 197 37% 24%;\n-        --chart-4: 43 74% 66%;\n-        --chart-5: 27 87% 67%;\n-        --radius: 0.5rem;\n-    }\n-    .dark {\n-        --background: 0 0% 3.9%;\n-        --foreground: 0 0% 98%;\n-        --card: 0 0% 3.9%;\n-        --card-foreground: 0 0% 98%;\n-        --popover: 0 0% 3.9%;\n-        --popover-foreground: 0 0% 98%;\n-        --primary: 0 0% 98%;\n-        --primary-foreground: 0 0% 9%;\n-        --secondary: 0 0% 14.9%;\n-        --secondary-foreground: 0 0% 98%;\n-        --muted: 0 0% 14.9%;\n-        --muted-foreground: 0 0% 63.9%;\n-        --accent: 0 0% 14.9%;\n-        --accent-foreground: 0 0% 98%;\n-        --destructive: 0 62.8% 30.6%;\n-        --destructive-foreground: 0 0% 98%;\n-        --border: 0 0% 14.9%;\n-        --input: 0 0% 14.9%;\n-        --ring: 0 0% 83.1%;\n-        --chart-1: 220 70% 50%;\n-        --chart-2: 160 60% 45%;\n-        --chart-3: 30 80% 55%;\n-        --chart-4: 280 65% 60%;\n-        --chart-5: 340 75% 55%;\n+        --background: 222 84% 5%;\n+        --foreground: 210 40% 98%;\n+        --card: 222 47% 11%;\n+        --card-foreground: 210 40% 98%;\n+        --popover: 222 47% 11%;\n+        --popover-foreground: 210 40% 98%;\n+        --primary: 239 84% 67%;\n+        --primary-foreground: 210 40% 98%;\n+        --secondary: 215 28% 17%;\n+        --secondary-foreground: 210 40% 98%;\n+        --muted: 215 28% 17%;\n+        --muted-foreground: 215 20% 65%;\n+        --accent: 215 28% 17%;\n+        --accent-foreground: 210 40% 98%;\n+        --destructive: 0 70% 35%;\n+        --destructive-foreground: 210 40% 98%;\n+        --border: 215 28% 17%;\n+        --input: 215 28% 17%;\n+        --ring: 239 84% 67%;\n+        --chart-1: 239 84% 67%;\n+        --chart-2: 160 84% 39%;\n+        --chart-3: 308 72% 57%;\n+        --chart-4: 210 89% 60%;\n+        --chart-5: 43 74% 66%;\n+        --radius: 1rem;\n+        --prime-positive: #10b981;\n+        --prime-negative: #ef4444;\n+        --mirror-symmetry: #d946ef;\n+        --binary-zero: #475569;\n+        --binary-one: #3b82f6;\n+        --grid-lines: rgba(30, 41, 59, 0.5);\n     }\n }\n \n @layer base {\n     * {\n         @apply border-border;\n     }\n+\n+    html {\n+        @apply dark;\n+    }\n+\n     body {\n-        @apply bg-background text-foreground;\n+        @apply bg-background text-foreground;\n+        background-image: radial-gradient(circle at top, rgba(99, 102, 241, 0.18), transparent 30%),\n+            radial-gradient(circle at 80% 20%, rgba(217, 70, 239, 0.12), transparent 20%),\n+            linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(2, 6, 23, 1));\n+        min-height: 100vh;\n+    }\n+\n+    h1,\n+    h2,\n+    h3,\n+    h4,\n+    h5,\n+    h6 {\n+        font-family: \"Chivo\", sans-serif;\n+        letter-spacing: -0.02em;\n+    }\n+\n+    button,\n+    input,\n+    textarea,\n+    select {\n+        font-family: \"IBM Plex Sans\", sans-serif;\n+    }\n+\n+    ::selection {\n+        background: rgba(99, 102, 241, 0.45);\n+        color: #f8fafc;\n     }\n }\n+\n+@layer components {\n+    .panel-glass {\n+        @apply rounded-xl border border-white/10 bg-card/70 backdrop-blur-xl;\n+        box-shadow: 0 0 20px rgba(99, 102, 241, 0.12);\n+    }\n+\n+    .grid-noise {\n+        background-image: linear-gradient(var(--grid-lines) 1px, transparent 1px),\n+            linear-gradient(90deg, var(--grid-lines) 1px, transparent 1px);\n+        background-size: 32px 32px;\n+    }\n+\n+    .mono-value {\n+        font-family: \"JetBrains Mono\", monospace;\n+    }\n+}\n \n @layer base {\n     [data-debug-wrapper=\"true\"] {\n         display: contents !important;\n*** Update File: /app/frontend/tailwind.config.js\n@@\n                 colors: {\n                         background: 'hsl(var(--background))',\n                         foreground: 'hsl(var(--foreground))',\n@@\n                         chart: {\n                                 '1': 'hsl(var(--chart-1))',\n                                 '2': 'hsl(var(--chart-2))',\n                                 '3': 'hsl(var(--chart-3))',\n                                 '4': 'hsl(var(--chart-4))',\n                                 '5': 'hsl(var(--chart-5))'\n-                        }\n+                        },\n+                        primePositive: 'var(--prime-positive)',\n+                        primeNegative: 'var(--prime-negative)',\n+                        mirrorSymmetry: 'var(--mirror-symmetry)',\n+                        binaryZero: 'var(--binary-zero)',\n+                        binaryOne: 'var(--binary-one)'\n                 },\n+                fontFamily: {\n+                        heading: ['Chivo', 'sans-serif'],\n+                        body: ['IBM Plex Sans', 'sans-serif'],\n+                        mono: ['JetBrains Mono', 'monospace']\n+                },\n                 keyframes: {\n                         'accordion-down': {\n                                 from: {\n*** End Patch", "run_lint": false})
+Observation: Patch applied successfully (5 file ops).Секции пишу целиком: навигация, обзор, лаборатория формул и анализ числа.
+Action: apply_patch({"patch": "*** Begin Patch\n*** Add File: /app/frontend/src/components/ResearchLayout.jsx\n+import { Activity, Binary, Orbit, Sigma } from \"lucide-react\";\n+import { NavLink, Outlet } from \"react-router-dom\";\n+\n+import { Badge } from \"@/components/ui/badge\";\n+\n+const navigation = [\n+  { to: \"/\", label: \"\u041e\u0431\u0437\u043e\u0440\", icon: Orbit },\n+  { to: \"/formula-lab\", label: \"\u041b\u0430\u0431\u043e\u0440\u0430\u0442\u043e\u0440\u0438\u044f \u0444\u043e\u0440\u043c\u0443\u043b\", icon: Sigma },\n+  { to: \"/number-explorer\", label: \"\u0410\u043d\u0430\u043b\u0438\u0437 \u0447\u0438\u0441\u043b\u0430\", icon: Binary },\n+];\n+\n+export const ResearchLayout = ({\n+  analyzeNumber,\n+  applyConfig,\n+  config,\n+  numberLoading,\n+  numberResult,\n+  numberValue,\n+  setNumberValue,\n+  snapshot,\n+  snapshotLoading,\n+}) => {\n+  return (\n+    <div className=\"min-h-screen lg:grid lg:grid-cols-[280px_minmax(0,1fr)]\" data-testid=\"research-layout\">\n+      <aside className=\"border-b border-white/10 bg-card/40 px-5 py-6 backdrop-blur-2xl lg:min-h-screen lg:border-b-0 lg:border-r\">\n+        <div className=\"space-y-6\">\n+          <div className=\"space-y-3\">\n+            <Badge className=\"bg-primary/20 text-primary\" data-testid=\"brand-badge\" variant=\"outline\">\n+              Number Resonance MVP\n+            </Badge>\n+            <div>\n+              <h1 className=\"text-3xl font-heading text-foreground\" data-testid=\"brand-title\">\n+                Deep Research Grid\n+              </h1>\n+              <p className=\"mt-2 text-sm text-muted-foreground\" data-testid=\"brand-description\">\n+                \u041f\u0440\u0438\u043c\u043e\u0440\u0438\u0430\u043b\u044b, \u0434\u0432\u043e\u0438\u0447\u043d\u044b\u0435 \u0432\u0435\u0442\u0432\u0438, \u0437\u0435\u0440\u043a\u0430\u043b\u044c\u043d\u043e\u0441\u0442\u044c \u0438 \u043f\u0440\u043e\u0432\u0435\u0440\u043a\u0430 \u0444\u043e\u0440\u043c\u0443\u043b \u043d\u0430 \u0442\u043e\u0447\u043d\u043e\u0441\u0442\u044c.\n+              </p>\n+            </div>\n+          </div>\n+\n+          <nav className=\"space-y-2\" data-testid=\"main-navigation\">\n+            {navigation.map(({ to, label, icon: Icon }) => (\n+              <NavLink\n+                className={({ isActive }) =>\n+                  [\n+                    \"flex items-center gap-3 rounded-xl border px-4 py-3 text-sm transition-colors duration-300\",\n+                    isActive\n+                      ? \"border-primary/60 bg-primary/10 text-foreground\"\n+                      : \"border-white/5 bg-white/[0.02] text-muted-foreground hover:border-white/10 hover:bg-white/[0.04] hover:text-foreground\",\n+                  ].join(\" \")\n+                }\n+                data-testid={`nav-link-${label.toLowerCase().replace(/\\s+/g, \"-\")}`}\n+                key={to}\n+                to={to}\n+              >\n+                <Icon className=\"h-4 w-4\" />\n+                <span>{label}</span>\n+              </NavLink>\n+            ))}\n+          </nav>\n+\n+          <div className=\"panel-glass space-y-4 p-4\" data-testid=\"sidebar-summary-panel\">\n+            <div className=\"flex items-center gap-2 text-sm text-muted-foreground\">\n+              <Activity className=\"h-4 w-4 text-primary\" />\n+              \u0421\u043e\u0441\u0442\u043e\u044f\u043d\u0438\u0435 \u0438\u0441\u0441\u043b\u0435\u0434\u043e\u0432\u0430\u043d\u0438\u044f\n+            </div>\n+            <div className=\"grid grid-cols-2 gap-3\">\n+              <div data-testid=\"sidebar-limit-value\">\n+                <p className=\"text-xs uppercase tracking-[0.2em] text-muted-foreground\">\u043b\u0438\u043c\u0438\u0442</p>\n+                <p className=\"mono-value mt-1 text-lg text-foreground\">{config.limit}</p>\n+              </div>\n+              <div data-testid=\"sidebar-steps-value\">\n+                <p className=\"text-xs uppercase tracking-[0.2em] text-muted-foreground\">\u0448\u0430\u0433\u0438</p>\n+                <p className=\"mono-value mt-1 text-lg text-foreground\">{config.steps}</p>\n+              </div>\n+              <div data-testid=\"sidebar-formula-value\">\n+                <p className=\"text-xs uppercase tracking-[0.2em] text-muted-foreground\">\u0444\u043e\u0440\u043c\u0443\u043b\u0430</p>\n+                <p className=\"mono-value mt-1 text-sm text-foreground\">\n+                  {config.startValue} \u00d7 {config.multiplier}^n\n+                </p>\n+              </div>\n+              <div data-testid=\"sidebar-hit-value\">\n+                <p className=\"text-xs uppercase tracking-[0.2em] text-muted-foreground\">\u043f\u043e\u043f\u0430\u0434\u0430\u043d\u0438\u044f</p>\n+                <p className=\"mono-value mt-1 text-sm text-foreground\">\n+                  {snapshotLoading ? \"...\" : snapshot?.summary?.formulaHits ?? 0}\n+                </p>\n+              </div>\n+            </div>\n+            <div className=\"flex flex-wrap gap-2\" data-testid=\"sidebar-offset-badges\">\n+              {config.signedOffsets.map((offset, index) => (\n+                <Badge className=\"bg-secondary text-secondary-foreground\" key={`${offset}-${index}`} variant=\"secondary\">\n+                  {offset > 0 ? `+${offset}` : offset}\n+                </Badge>\n+              ))}\n+            </div>\n+          </div>\n+        </div>\n+      </aside>\n+\n+      <main className=\"p-4 md:p-6 lg:p-8\">\n+        <div className=\"mx-auto max-w-7xl space-y-8\">\n+          <header className=\"panel-glass grid-noise overflow-hidden px-6 py-6\" data-testid=\"page-hero-panel\">\n+            <div className=\"flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between\">\n+              <div className=\"max-w-3xl space-y-3\">\n+                <p className=\"text-xs uppercase tracking-[0.35em] text-primary\">Prime pattern navigator</p>\n+                <h2 className=\"text-4xl font-heading text-foreground sm:text-5xl\">\u0418\u0441\u0441\u043b\u0435\u0434\u043e\u0432\u0430\u043d\u0438\u0435 \u0432\u0435\u0442\u0432\u0435\u0439 \u0447\u0435\u0440\u0435\u0437 \u0434\u0432\u043e\u0438\u0447\u043d\u044b\u0439 \u0440\u0438\u0442\u043c \u0438 \u043f\u0440\u0438\u043c\u043e\u0440\u0438\u0430\u043b\u044b</h2>\n+                <p className=\"max-w-2xl text-sm text-muted-foreground md:text-base\" data-testid=\"hero-description\">\n+                  \u0421\u0440\u0430\u0432\u043d\u0438\u0432\u0430\u0439\u0442\u0435 \u0440\u0435\u0430\u043b\u044c\u043d\u044b\u0435 \u043f\u0440\u043e\u0441\u0442\u044b\u0435 \u0447\u0438\u0441\u043b\u0430 \u0441 \u0432\u0430\u0448\u0438\u043c\u0438 \u0444\u043e\u0440\u043c\u0443\u043b\u0430\u043c\u0438, \u0441\u043b\u0435\u0434\u0438\u0442\u0435 \u0437\u0430 \u0442\u043e\u0447\u043d\u043e\u0441\u0442\u044c\u044e \u0433\u0438\u043f\u043e\u0442\u0435\u0437 \u0438 \u0441\u043c\u043e\u0442\u0440\u0438\u0442\u0435, \u043a\u0430\u043a \u0447\u0438\u0441\u043b\u043e \u043f\u0440\u043e\u0445\u043e\u0434\u0438\u0442 \u0447\u0435\u0440\u0435\u0437 \u0434\u0435\u0440\u0435\u0432\u043e \u043f\u0440\u0438\u043c\u043e\u0440\u0438\u0430\u043b\u044c\u043d\u044b\u0445 \u0443\u0440\u043e\u0432\u043d\u0435\u0439.\n+                </p>\n+              </div>\n+              <div className=\"flex min-w-[220px] flex-col gap-3 rounded-2xl border border-white/10 bg-background/50 p-4\" data-testid=\"hero-live-number-card\">\n+                <span className=\"text-xs uppercase tracking-[0.2em] text-muted-foreground\">\u0442\u0435\u043a\u0443\u0449\u0435\u0435 \u0447\u0438\u0441\u043b\u043e</span>\n+                <span className=\"mono-value text-3xl text-foreground\">{numberValue}</span>\n+                <span className=\"text-sm text-muted-foreground\">\n+                  {numberLoading ? \"\u043f\u0440\u043e\u0432\u0435\u0440\u044f\u0435\u043c \u0441\u0442\u0440\u0443\u043a\u0442\u0443\u0440\u0443...\" : numberResult?.isPrime ? \"\u0441\u0435\u0439\u0447\u0430\u0441 \u043e\u0442\u043c\u0435\u0447\u0435\u043d\u043e \u043a\u0430\u043a \u043f\u0440\u043e\u0441\u0442\u043e\u0435\" : \"\u0441\u0435\u0439\u0447\u0430\u0441 \u043e\u0442\u043c\u0435\u0447\u0435\u043d\u043e \u043a\u0430\u043a \u0441\u043e\u0441\u0442\u0430\u0432\u043d\u043e\u0435\"}\n+                </span>\n+              </div>\n+            </div>\n+          </header>\n+\n+          <Outlet\n+            context={{\n+              analyzeNumber,\n+              applyConfig,\n+              config,\n+              numberLoading,\n+              numberResult,\n+              numberValue,\n+              setNumberValue,\n+              snapshot,\n+              snapshotLoading,\n+            }}\n+          />\n+        </div>\n+      </main>\n+    </div>\n+  );\n+};\n*** Add File: /app/frontend/src/components/MetricCard.jsx\n+import { Card, CardContent } from \"@/components/ui/card\";\n+\n+export const MetricCard = ({ accentClass, caption, help, title, value, testId }) => {\n+  return (\n+    <Card className=\"panel-glass overflow-hidden border-white/10\" data-testid={testId}>\n+      <CardContent className=\"space-y-3 p-5\">\n+        <div className={`h-1 w-16 rounded-full ${accentClass}`} />\n+        <div className=\"space-y-1\">\n+          <p className=\"text-xs uppercase tracking-[0.22em] text-muted-foreground\">{caption}</p>\n+          <p className=\"mono-value text-3xl text-foreground\">{value}</p>\n+        </div>\n+        <p className=\"text-sm text-muted-foreground\">{title}</p>\n+        <p className=\"text-xs text-muted-foreground/80\">{help}</p>\n+      </CardContent>\n+    </Card>\n+  );\n+};\n*** Add File: /app/frontend/src/pages/OverviewPage.jsx\n+import { ArrowRight, Network, Sparkles } from \"lucide-react\";\n+import { useMemo } from \"react\";\n+import { useNavigate, useOutletContext } from \"react-router-dom\";\n+import {\n+  CartesianGrid,\n+  Line,\n+  LineChart,\n+  ResponsiveContainer,\n+  Scatter,\n+  ScatterChart,\n+  Tooltip,\n+  XAxis,\n+  YAxis,\n+} from \"recharts\";\n+\n+import { MetricCard } from \"@/components/MetricCard\";\n+import { Badge } from \"@/components/ui/badge\";\n+import { Button } from \"@/components/ui/button\";\n+import { Card, CardContent, CardHeader, CardTitle } from \"@/components/ui/card\";\n+\n+const quickNumbers = [29, 257, 2046, 2311, 4093];\n+\n+export default function OverviewPage() {\n+  const navigate = useNavigate();\n+  const { analyzeNumber, setNumberValue, snapshot, snapshotLoading } = useOutletContext();\n+\n+  const chartData = useMemo(() => {\n+    const distribution = snapshot?.distribution ?? [];\n+    return {\n+      formula: distribution.filter((item) => item.type === \"formula\"),\n+      prime: distribution.filter((item) => item.type === \"prime\"),\n+    };\n+  }, [snapshot]);\n+\n+  const handleQuickNumber = async (value) => {\n+    setNumberValue(String(value));\n+    await analyzeNumber(String(value));\n+    navigate(\"/number-explorer\");\n+  };\n+\n+  if (snapshotLoading || !snapshot) {\n+    return <div className=\"panel-glass h-[420px] animate-pulse\" data-testid=\"overview-loading-state\" />;\n+  }\n+\n+  return (\n+    <div className=\"space-y-8\" data-testid=\"overview-page\">\n+      <section className=\"grid gap-4 md:grid-cols-2 xl:grid-cols-4\">\n+        <MetricCard accentClass=\"bg-primary\" caption=\"\u043f\u0440\u043e\u0441\u0442\u044b\u0435\" help=\"\u041a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u043f\u0440\u043e\u0441\u0442\u044b\u0445 \u0434\u043e \u0442\u0435\u043a\u0443\u0449\u0435\u0433\u043e \u043b\u0438\u043c\u0438\u0442\u0430.\" testId=\"metric-prime-count\" title=\"\u0411\u0430\u0437\u043e\u0432\u043e\u0435 \u043c\u043d\u043e\u0436\u0435\u0441\u0442\u0432\u043e \u0441\u0440\u0430\u0432\u043d\u0435\u043d\u0438\u044f\" value={snapshot.summary.primeCount} />\n+        <MetricCard accentClass=\"bg-primePositive\" caption=\"\u043f\u043e\u043f\u0430\u0434\u0430\u043d\u0438\u044f\" help=\"\u0421\u043a\u043e\u043b\u044c\u043a\u043e \u0447\u0438\u0441\u0435\u043b \u0438\u0437 \u0444\u043e\u0440\u043c\u0443\u043b\u044b \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u043e \u043f\u0440\u043e\u0441\u0442\u044b\u0435.\" testId=\"metric-formula-hits\" title=\"\u0424\u043e\u0440\u043c\u0443\u043b\u0430 \u043f\u0435\u0440\u0435\u0441\u0435\u043a\u043b\u0430\u0441\u044c \u0441 \u043f\u0440\u043e\u0441\u0442\u044b\u043c\u0438\" value={snapshot.summary.formulaHits} />\n+        <MetricCard accentClass=\"bg-mirrorSymmetry\" caption=\"\u0442\u043e\u0447\u043d\u043e\u0441\u0442\u044c\" help=\"\u0414\u043e\u043b\u044f \u043f\u043e\u043f\u0430\u0434\u0430\u043d\u0438\u0439 \u0444\u043e\u0440\u043c\u0443\u043b\u044b \u0441\u0440\u0435\u0434\u0438 \u0435\u0451 \u0441\u043e\u0431\u0441\u0442\u0432\u0435\u043d\u043d\u044b\u0445 \u043a\u0430\u043d\u0434\u0438\u0434\u0430\u0442\u043e\u0432.\" testId=\"metric-precision\" title=\"\u0424\u043e\u0440\u043c\u0443\u043b\u044c\u043d\u0430\u044f \u0442\u043e\u0447\u043d\u043e\u0441\u0442\u044c \u0432 \u043f\u0440\u043e\u0446\u0435\u043d\u0442\u0430\u0445\" value={`${snapshot.summary.precision}%`} />\n+        <MetricCard accentClass=\"bg-binaryOne\" caption=\"\u043f\u043e\u043a\u0440\u044b\u0442\u0438\u0435\" help=\"\u041a\u0430\u043a\u0443\u044e \u0434\u043e\u043b\u044e \u0432\u0441\u0435\u0445 \u043f\u0440\u043e\u0441\u0442\u044b\u0445 \u0447\u0438\u0441\u0435\u043b \u043e\u0431\u044a\u044f\u0441\u043d\u044f\u0435\u0442 \u0442\u0435\u043a\u0443\u0449\u0430\u044f \u0444\u043e\u0440\u043c\u0443\u043b\u0430.\" testId=\"metric-coverage\" title=\"\u041f\u043e\u043a\u0440\u044b\u0442\u0438\u0435 \u043f\u0440\u043e\u0441\u0442\u044b\u0445 \u0447\u0438\u0441\u0435\u043b\" value={`${snapshot.summary.coverage}%`} />\n+      </section>\n+\n+      <section className=\"grid gap-6 xl:grid-cols-[1.2fr_0.8fr]\">\n+        <Card className=\"panel-glass border-white/10\" data-testid=\"overview-distribution-card\">\n+          <CardHeader className=\"flex flex-row items-center justify-between pb-4\">\n+            <div>\n+              <p className=\"text-xs uppercase tracking-[0.25em] text-muted-foreground\">\u043d\u0430\u043b\u043e\u0436\u0435\u043d\u0438\u0435 \u0440\u0430\u0441\u043f\u0440\u0435\u0434\u0435\u043b\u0435\u043d\u0438\u0439</p>\n+              <CardTitle className=\"mt-2 text-2xl font-heading\">\u0420\u0435\u0430\u043b\u044c\u043d\u044b\u0435 \u043f\u0440\u043e\u0441\u0442\u044b\u0435 \u043f\u0440\u043e\u0442\u0438\u0432 \u0432\u0430\u0448\u0435\u0439 \u0444\u043e\u0440\u043c\u0443\u043b\u044b</CardTitle>\n+            </div>\n+            <Badge className=\"bg-secondary text-secondary-foreground\" variant=\"secondary\">\n+              \u0434\u043e {snapshot.config.limit}\n+            </Badge>\n+          </CardHeader>\n+          <CardContent className=\"h-[360px] pt-0\" data-testid=\"distribution-chart-container\">\n+            <ResponsiveContainer width=\"100%\" height=\"100%\">\n+              <ScatterChart margin={{ top: 20, right: 20, left: 0, bottom: 20 }}>\n+                <CartesianGrid stroke=\"rgba(148,163,184,0.14)\" />\n+                <XAxis dataKey=\"number\" name=\"\u0427\u0438\u0441\u043b\u043e\" stroke=\"#94A3B8\" type=\"number\" />\n+                <YAxis allowDecimals={false} domain={[0, 1.2]} stroke=\"#94A3B8\" type=\"number\" />\n+                <Tooltip contentStyle={{ background: \"#0f172a\", border: \"1px solid rgba(99,102,241,0.25)\", borderRadius: 12 }} cursor={{ strokeDasharray: \"4 4\" }} />\n+                <Scatter data={chartData.prime} fill=\"#10b981\" name=\"\u041f\u0440\u043e\u0441\u0442\u044b\u0435\" />\n+                <Scatter data={chartData.formula} fill=\"#d946ef\" name=\"\u0424\u043e\u0440\u043c\u0443\u043b\u0430\" />\n+              </ScatterChart>\n+            </ResponsiveContainer>\n+          </CardContent>\n+        </Card>\n+\n+        <Card className=\"panel-glass border-white/10\" data-testid=\"overview-notes-card\">\n+          <CardHeader>\n+            <p className=\"text-xs uppercase tracking-[0.25em] text-muted-foreground\">\u0438\u0441\u0441\u043b\u0435\u0434\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0435 \u0437\u0430\u043c\u0435\u0442\u043a\u0438</p>\n+            <CardTitle className=\"mt-2 text-2xl font-heading\">\u0427\u0442\u043e \u0432\u0438\u0434\u043d\u043e \u043f\u0440\u044f\u043c\u043e \u0441\u0435\u0439\u0447\u0430\u0441</CardTitle>\n+          </CardHeader>\n+          <CardContent className=\"space-y-4 pt-0\">\n+            {snapshot.notes.map((note, index) => (\n+              <div className=\"rounded-2xl border border-white/8 bg-background/50 p-4\" data-testid={`overview-note-${index + 1}`} key={note}>\n+                <div className=\"flex items-start gap-3\">\n+                  <Sparkles className=\"mt-0.5 h-4 w-4 text-primary\" />\n+                  <p className=\"text-sm text-muted-foreground\">{note}</p>\n+                </div>\n+              </div>\n+            ))}\n+\n+            <div className=\"rounded-2xl border border-primary/20 bg-primary/8 p-4\" data-testid=\"overview-quick-actions\">\n+              <p className=\"text-sm text-foreground\">\u0411\u044b\u0441\u0442\u0440\u044b\u0439 \u043f\u0435\u0440\u0435\u0445\u043e\u0434 \u043a \u0447\u0438\u0441\u043b\u0430\u043c, \u043a\u043e\u0442\u043e\u0440\u044b\u0435 \u0443\u0434\u043e\u0431\u043d\u043e \u043f\u0440\u043e\u0432\u0435\u0440\u044f\u0442\u044c \u043a\u0430\u043a \u0443\u0437\u043b\u044b \u0434\u0435\u0440\u0435\u0432\u0430.</p>\n+              <div className=\"mt-4 flex flex-wrap gap-2\">\n+                {quickNumbers.map((value) => (\n+                  <Button data-testid={`quick-number-${value}`} key={value} onClick={() => handleQuickNumber(value)} size=\"sm\" variant=\"outline\">\n+                    {value}\n+                    <ArrowRight className=\"h-4 w-4\" />\n+                  </Button>\n+                ))}\n+              </div>\n+            </div>\n+          </CardContent>\n+        </Card>\n+      </section>\n+\n+      <section className=\"grid gap-6 xl:grid-cols-[1.1fr_0.9fr]\">\n+        <Card className=\"panel-glass border-white/10\" data-testid=\"overview-hit-curve-card\">\n+          <CardHeader>\n+            <p className=\"text-xs uppercase tracking-[0.25em] text-muted-foreground\">\u043a\u0440\u0438\u0432\u0430\u044f \u0442\u043e\u0447\u043d\u043e\u0441\u0442\u0438</p>\n+            <CardTitle className=\"mt-2 text-2xl font-heading\">\u041a\u0430\u043a \u043c\u0435\u043d\u044f\u0435\u0442\u0441\u044f \u043f\u0440\u043e\u0446\u0435\u043d\u0442 \u043f\u043e\u043f\u0430\u0434\u0430\u043d\u0438\u044f \u043f\u043e \u0448\u0430\u0433\u0430\u043c</CardTitle>\n+          </CardHeader>\n+          <CardContent className=\"h-[320px] pt-0\">\n+            <ResponsiveContainer width=\"100%\" height=\"100%\">\n+              <LineChart data={snapshot.hitCurve} margin={{ top: 20, right: 16, bottom: 20, left: 0 }}>\n+                <CartesianGrid stroke=\"rgba(148,163,184,0.14)\" />\n+                <XAxis dataKey=\"step\" stroke=\"#94A3B8\" />\n+                <YAxis stroke=\"#94A3B8\" />\n+                <Tooltip contentStyle={{ background: \"#0f172a\", border: \"1px solid rgba(99,102,241,0.25)\", borderRadius: 12 }} />\n+                <Line dataKey=\"precision\" dot={{ fill: \"#6366F1\", r: 3 }} stroke=\"#6366F1\" strokeWidth={2.5} type=\"monotone\" />\n+              </LineChart>\n+            </ResponsiveContainer>\n+          </CardContent>\n+        </Card>\n+\n+        <Card className=\"panel-glass border-white/10\" data-testid=\"overview-prime-sample-card\">\n+          <CardHeader>\n+            <div className=\"flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-muted-foreground\">\n+              <Network className=\"h-4 w-4 text-primary\" />\n+              \u043f\u0435\u0440\u0432\u044b\u0435 \u043f\u0440\u043e\u0441\u0442\u044b\u0435 \u0432 \u0434\u0438\u0430\u043f\u0430\u0437\u043e\u043d\u0435\n+            </div>\n+            <CardTitle className=\"mt-2 text-2xl font-heading\">\u041a\u0430\u043a\u0438\u0435 \u0447\u0438\u0441\u043b\u0430 \u0443\u0436\u0435 \u043f\u043e\u043a\u0440\u044b\u0442\u044b \u0444\u043e\u0440\u043c\u0443\u043b\u043e\u0439</CardTitle>\n+          </CardHeader>\n+          <CardContent className=\"flex flex-wrap gap-2 pt-0\" data-testid=\"prime-sample-badges\">\n+            {snapshot.primeSample.slice(0, 28).map((item) => (\n+              <Badge className={item.inFormula ? \"bg-primePositive/20 text-primePositive\" : \"bg-secondary text-secondary-foreground\"} data-testid={`prime-sample-${item.number}`} key={item.number} variant=\"secondary\">\n+                {item.number}\n+              </Badge>\n+            ))}\n+          </CardContent>\n+        </Card>\n+      </section>\n+\n+      <section className=\"panel-glass p-6\" data-testid=\"primorial-levels-section\">\n+        <div className=\"mb-6 flex flex-col gap-2\">\n+          <p className=\"text-xs uppercase tracking-[0.25em] text-muted-foreground\">\u0434\u0435\u0440\u0435\u0432\u043e \u043f\u0440\u0438\u043c\u043e\u0440\u0438\u0430\u043b\u043e\u0432</p>\n+          <h3 className=\"text-2xl font-heading text-foreground\">\u0423\u0440\u043e\u0432\u043d\u0438, \u0447\u0435\u0440\u0435\u0437 \u043a\u043e\u0442\u043e\u0440\u044b\u0435 \u043f\u0440\u043e\u0445\u043e\u0434\u044f\u0442 \u043a\u0430\u043d\u0434\u0438\u0434\u0430\u0442\u044b</h3>\n+        </div>\n+\n+        <div className=\"grid gap-4 lg:grid-cols-5\">\n+          {snapshot.primorialLevels.map((level) => (\n+            <div className=\"rounded-2xl border border-white/8 bg-background/50 p-4 transition-transform duration-200 hover:-translate-y-1\" data-testid={`primorial-level-${level.depth}`} key={level.primorial}>\n+              <p className=\"text-xs uppercase tracking-[0.2em] text-muted-foreground\">\u0443\u0440\u043e\u0432\u0435\u043d\u044c {level.depth}</p>\n+              <p className=\"mono-value mt-2 text-2xl text-foreground\">{level.primorial}</p>\n+              <div className=\"mt-4 space-y-2 text-sm text-muted-foreground\">\n+                <p data-testid={`level-prime-${level.depth}`}>\u0441\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0439 \u043f\u0440\u043e\u0441\u0442\u043e\u0439: {level.prime}</p>\n+                <p data-testid={`level-branch-factor-${level.depth}`}>\u0432\u0435\u0442\u0432\u0435\u0439: {level.branchFactor}</p>\n+                <p data-testid={`level-density-${level.depth}`}>\u043f\u043b\u043e\u0442\u043d\u043e\u0441\u0442\u044c: {level.survivorDensity}</p>\n+              </div>\n+              <div className=\"mt-4 flex flex-wrap gap-2\" data-testid={`level-survivors-${level.depth}`}>\n+                {level.sampleSurvivors.slice(0, 6).map((survivor) => (\n+                  <Badge className=\"bg-background text-foreground\" key={survivor} variant=\"outline\">\n+                    {survivor}\n+                  </Badge>\n+                ))}\n+              </div>\n+            </div>\n+          ))}\n+        </div>\n+      </section>\n+    </div>\n+  );\n+}\n*** Add File: /app/frontend/src/pages/FormulaLabPage.jsx\n+import { useEffect, useMemo, useState } from \"react\";\n+import { useOutletContext } from \"react-router-dom\";\n+import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from \"recharts\";\n+\n+import { toast } from \"@/components/ui/sonner\";\n+import { Button } from \"@/components/ui/button\";\n+import { Card, CardContent, CardHeader, CardTitle } from \"@/components/ui/card\";\n+import { Input } from \"@/components/ui/input\";\n+import { Label } from \"@/components/ui/label\";\n+import { Slider } from \"@/components/ui/slider\";\n+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from \"@/components/ui/table\";\n+\n+const presets = {\n+  mirrored8x: {\n+    label: \"4 \u00d7 8^n \u00b1 2\",\n+    values: { limit: \"12000\", startValue: \"4\", multiplier: \"8\", signedOffsets: \"2,-2\", steps: \"18\", basePrimes: \"2,3,5,7,11\" },\n+  },\n+  deeperGrid: {\n+    label: \"8 \u00d7 8^n \u00b1 6\",\n+    values: { limit: \"20000\", startValue: \"8\", multiplier: \"8\", signedOffsets: \"6,-6,2,-2\", steps: \"20\", basePrimes: \"2,3,5,7,11,13\" },\n+  },\n+};\n+\n+export default function FormulaLabPage() {\n+  const { applyConfig, config, snapshot, snapshotLoading } = useOutletContext();\n+  const [formState, setFormState] = useState({\n+    limit: String(config.limit),\n+    startValue: String(config.startValue),\n+    multiplier: String(config.multiplier),\n+    signedOffsets: config.signedOffsets.join(\",\"),\n+    steps: String(config.steps),\n+    basePrimes: config.basePrimes.join(\",\"),\n+  });\n+\n+  useEffect(() => {\n+    setFormState({\n+      limit: String(config.limit),\n+      startValue: String(config.startValue),\n+      multiplier: String(config.multiplier),\n+      signedOffsets: config.signedOffsets.join(\",\"),\n+      steps: String(config.steps),\n+      basePrimes: config.basePrimes.join(\",\"),\n+    });\n+  }, [config]);\n+\n+  const visibleCandidates = useMemo(() => (snapshot?.formulaSequence ?? []).slice(0, 12), [snapshot]);\n+\n+  const setField = (field, value) => {\n+    setFormState((current) => ({ ...current, [field]: value }));\n+  };\n+\n+  const applyPreset = (key) => {\n+    setFormState(presets[key].values);\n+  };\n+\n+  const handleSubmit = async (event) => {\n+    event.preventDefault();\n+    const signedOffsets = formState.signedOffsets.split(\",\").map((value) => Number(value.trim())).filter((value) => !Number.isNaN(value));\n+    const basePrimes = formState.basePrimes.split(\",\").map((value) => Number(value.trim())).filter((value) => !Number.isNaN(value) && value > 1);\n+\n+    if (!signedOffsets.length || !basePrimes.length) {\n+      toast.error(\"\u0421\u043c\u0435\u0449\u0435\u043d\u0438\u044f \u0438 \u0431\u0430\u0437\u043e\u0432\u044b\u0435 \u043f\u0440\u043e\u0441\u0442\u044b\u0435 \u0434\u043e\u043b\u0436\u043d\u044b \u0441\u043e\u0434\u0435\u0440\u0436\u0430\u0442\u044c \u0447\u0438\u0441\u043b\u0430.\");\n+      return;\n+    }\n+\n+    await applyConfig({\n+      limit: Number(formState.limit) || 12000,\n+      startValue: Number(formState.startValue) || 4,\n+      multiplier: Number(formState.multiplier) || 8,\n+      signedOffsets,\n+      steps: Number(formState.steps) || 18,\n+      basePrimes,\n+    });\n+  };\n+\n+  return (\n+    <div className=\"grid gap-6 xl:grid-cols-[0.95fr_1.05fr]\" data-testid=\"formula-lab-page\">\n+      <Card className=\"panel-glass border-white/10\" data-testid=\"formula-controls-card\">\n+        <CardHeader>\n+          <p className=\"text-xs uppercase tracking-[0.25em] text-muted-foreground\">\u043a\u043e\u043d\u0441\u0442\u0440\u0443\u043a\u0442\u043e\u0440 \u0433\u0438\u043f\u043e\u0442\u0435\u0437</p>\n+          <CardTitle className=\"mt-2 text-2xl font-heading\">\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0430 \u0444\u043e\u0440\u043c\u0443\u043b\u044b \u0438 \u0432\u0435\u0442\u0432\u0435\u0439</CardTitle>\n+        </CardHeader>\n+        <CardContent className=\"space-y-6 pt-0\">\n+          <div className=\"flex flex-wrap gap-2\" data-testid=\"formula-presets-row\">\n+            {Object.entries(presets).map(([key, preset]) => (\n+              <Button data-testid={`preset-${key}`} key={key} onClick={() => applyPreset(key)} size=\"sm\" type=\"button\" variant=\"outline\">\n+                {preset.label}\n+              </Button>\n+            ))}\n+          </div>\n+\n+          <form className=\"space-y-5\" onSubmit={handleSubmit}>\n+            <div className=\"grid gap-4 md:grid-cols-2\">\n+              <div className=\"space-y-2\">\n+                <Label htmlFor=\"limit\">\u041b\u0438\u043c\u0438\u0442 \u043f\u043e\u0438\u0441\u043a\u0430</Label>\n+                <Input data-testid=\"formula-limit-input\" id=\"limit\" onChange={(event) => setField(\"limit\", event.target.value)} value={formState.limit} />\n+              </div>\n+              <div className=\"space-y-2\">\n+                <Label htmlFor=\"start-value\">\u0421\u0442\u0430\u0440\u0442\u043e\u0432\u043e\u0435 \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435</Label>\n+                <Input data-testid=\"formula-start-input\" id=\"start-value\" onChange={(event) => setField(\"startValue\", event.target.value)} value={formState.startValue} />\n+              </div>\n+              <div className=\"space-y-2\">\n+                <Label htmlFor=\"multiplier\">\u041c\u043d\u043e\u0436\u0438\u0442\u0435\u043b\u044c</Label>\n+                <Input data-testid=\"formula-multiplier-input\" id=\"multiplier\" onChange={(event) => setField(\"multiplier\", event.target.value)} value={formState.multiplier} />\n+              </div>\n+              <div className=\"space-y-2\">\n+                <Label htmlFor=\"offsets\">\u0421\u043c\u0435\u0449\u0435\u043d\u0438\u044f</Label>\n+                <Input data-testid=\"formula-offsets-input\" id=\"offsets\" onChange={(event) => setField(\"signedOffsets\", event.target.value)} value={formState.signedOffsets} />\n+              </div>\n+            </div>\n+\n+            <div className=\"space-y-4 rounded-2xl border border-white/8 bg-background/50 p-4\" data-testid=\"formula-steps-slider-card\">\n+              <div className=\"flex items-center justify-between gap-4\">\n+                <div>\n+                  <p className=\"text-sm text-foreground\">\u0413\u043b\u0443\u0431\u0438\u043d\u0430 \u043f\u043e\u0441\u043b\u0435\u0434\u043e\u0432\u0430\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u0438</p>\n+                  <p className=\"text-xs text-muted-foreground\">\u0421\u043a\u043e\u043b\u044c\u043a\u043e \u0448\u0430\u0433\u043e\u0432 \u0444\u043e\u0440\u043c\u0443\u043b\u044b \u043f\u043e\u043f\u0430\u0434\u0451\u0442 \u0432 \u0440\u0430\u0441\u0447\u0451\u0442.</p>\n+                </div>\n+                <span className=\"mono-value text-lg text-foreground\" data-testid=\"formula-steps-value\">\n+                  {formState.steps}\n+                </span>\n+              </div>\n+              <Slider data-testid=\"formula-steps-slider\" max={30} min={4} onValueChange={(value) => setField(\"steps\", String(value[0]))} step={1} value={[Number(formState.steps)]} />\n+            </div>\n+\n+            <div className=\"space-y-2\">\n+              <Label htmlFor=\"base-primes\">\u0411\u0430\u0437\u043e\u0432\u044b\u0435 \u043f\u0440\u043e\u0441\u0442\u044b\u0435 \u0434\u043b\u044f \u043f\u0440\u0438\u043c\u043e\u0440\u0438\u0430\u043b\u043e\u0432</Label>\n+              <Input data-testid=\"formula-base-primes-input\" id=\"base-primes\" onChange={(event) => setField(\"basePrimes\", event.target.value)} value={formState.basePrimes} />\n+            </div>\n+\n+            <Button className=\"w-full\" data-testid=\"apply-formula-button\" disabled={snapshotLoading} type=\"submit\">\n+              {snapshotLoading ? \"\u041f\u0435\u0440\u0435\u0441\u0447\u0438\u0442\u044b\u0432\u0430\u0435\u043c...\" : \"\u041f\u0440\u0438\u043c\u0435\u043d\u0438\u0442\u044c \u0444\u043e\u0440\u043c\u0443\u043b\u0443\"}\n+            </Button>\n+          </form>\n+        </CardContent>\n+      </Card>\n+\n+      <div className=\"space-y-6\">\n+        <Card className=\"panel-glass border-white/10\" data-testid=\"formula-hit-curve-card\">\n+          <CardHeader>\n+            <p className=\"text-xs uppercase tracking-[0.25em] text-muted-foreground\">\u043f\u0440\u043e\u0446\u0435\u043d\u0442 \u043f\u043e\u043f\u0430\u0434\u0430\u043d\u0438\u044f</p>\n+            <CardTitle className=\"mt-2 text-2xl font-heading\">\u0422\u043e\u0447\u043d\u043e\u0441\u0442\u044c \u0432\u043e \u0432\u0440\u0435\u043c\u044f \u043f\u043e\u0441\u0442\u0440\u043e\u0435\u043d\u0438\u044f \u0444\u043e\u0440\u043c\u0443\u043b\u044b</CardTitle>\n+          </CardHeader>\n+          <CardContent className=\"h-[300px] pt-0\">\n+            <ResponsiveContainer width=\"100%\" height=\"100%\">\n+              <LineChart data={snapshot?.hitCurve ?? []} margin={{ top: 20, right: 16, left: 0, bottom: 20 }}>\n+                <CartesianGrid stroke=\"rgba(148,163,184,0.14)\" />\n+                <XAxis dataKey=\"step\" stroke=\"#94A3B8\" />\n+                <YAxis stroke=\"#94A3B8\" />\n+                <Tooltip contentStyle={{ background: \"#0f172a\", border: \"1px solid rgba(99,102,241,0.25)\", borderRadius: 12 }} />\n+                <Line dataKey=\"precision\" dot={{ fill: \"#10b981\", r: 3 }} stroke=\"#10b981\" strokeWidth={2.5} type=\"monotone\" />\n+              </LineChart>\n+            </ResponsiveContainer>\n+          </CardContent>\n+        </Card>\n+\n+        <Card className=\"panel-glass border-white/10\" data-testid=\"formula-candidate-table-card\">\n+          <CardHeader>\n+            <p className=\"text-xs uppercase tracking-[0.25em] text-muted-foreground\">\u043f\u0435\u0440\u0432\u044b\u0435 \u043a\u0430\u043d\u0434\u0438\u0434\u0430\u0442\u044b</p>\n+            <CardTitle className=\"mt-2 text-2xl font-heading\">\u041a\u0430\u043a\u0438\u0435 \u0447\u0438\u0441\u043b\u0430 \u0441\u0435\u0439\u0447\u0430\u0441 \u043f\u043e\u0440\u043e\u0436\u0434\u0430\u0435\u0442 \u0444\u043e\u0440\u043c\u0443\u043b\u0430</CardTitle>\n+          </CardHeader>\n+          <CardContent className=\"pt-0\">\n+            <Table data-testid=\"formula-candidate-table\">\n+              <TableHeader>\n+                <TableRow>\n+                  <TableHead>\u0428\u0430\u0433</TableHead>\n+                  <TableHead>\u0411\u0430\u0437\u0430</TableHead>\n+                  <TableHead>\u0421\u043c\u0435\u0449\u0435\u043d\u0438\u0435</TableHead>\n+                  <TableHead>\u041a\u0430\u043d\u0434\u0438\u0434\u0430\u0442</TableHead>\n+                  <TableHead>\u0421\u0442\u0430\u0442\u0443\u0441</TableHead>\n+                </TableRow>\n+              </TableHeader>\n+              <TableBody>\n+                {visibleCandidates.map((item) => (\n+                  <TableRow data-testid={`formula-row-${item.index + 1}`} key={`${item.index}-${item.candidate}`}>\n+                    <TableCell className=\"mono-value\">{item.index + 1}</TableCell>\n+                    <TableCell className=\"mono-value\">{item.baseTerm}</TableCell>\n+                    <TableCell className=\"mono-value\">{item.offset > 0 ? `+${item.offset}` : item.offset}</TableCell>\n+                    <TableCell className=\"mono-value\">{item.candidate}</TableCell>\n+                    <TableCell className={item.isPrime ? \"text-primePositive\" : \"text-muted-foreground\"}>\n+                      {item.isPrime ? \"prime\" : item.inRange ? \"composite\" : \"out of range\"}\n+                    </TableCell>\n+                  </TableRow>\n+                ))}\n+              </TableBody>\n+            </Table>\n+          </CardContent>\n+        </Card>\n+      </div>\n+    </div>\n+  );\n+}\n*** Add File: /app/frontend/src/pages/NumberExplorerPage.jsx\n+import { useOutletContext } from \"react-router-dom\";\n+\n+import { Badge } from \"@/components/ui/badge\";\n+import { Button } from \"@/components/ui/button\";\n+import { Card, CardContent, CardHeader, CardTitle } from \"@/components/ui/card\";\n+import { Input } from \"@/components/ui/input\";\n+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from \"@/components/ui/table\";\n+\n+const renderBits = (bits = \"\") =>\n+  bits.split(\"\").map((bit, index) => (\n+    <span className={bit === \"1\" ? \"rounded-md bg-binaryOne/20 px-2 py-1 text-binaryOne\" : \"rounded-md bg-binaryZero/20 px-2 py-1 text-muted-foreground\"} key={`${bit}-${index}`}>\n+      {bit}\n+    </span>\n+  ));\n+\n+export default function NumberExplorerPage() {\n+  const { analyzeNumber, numberLoading, numberResult, numberValue, setNumberValue } = useOutletContext();\n+\n+  const handleSubmit = async (event) => {\n+    event.preventDefault();\n+    await analyzeNumber(numberValue);\n+  };\n+\n+  return (\n+    <div className=\"space-y-6\" data-testid=\"number-explorer-page\">\n+      <Card className=\"panel-glass border-white/10\" data-testid=\"number-search-card\">\n+        <CardHeader>\n+          <p className=\"text-xs uppercase tracking-[0.25em] text-muted-foreground\">\u0430\u0434\u0440\u0435\u0441 \u0447\u0438\u0441\u043b\u0430</p>\n+          <CardTitle className=\"mt-2 text-2xl font-heading\">\u041f\u0440\u043e\u0432\u0435\u0440\u043a\u0430 \u0447\u0435\u0440\u0435\u0437 \u0434\u0432\u043e\u0438\u0447\u043d\u0443\u044e \u0444\u043e\u0440\u043c\u0443 \u0438 \u043f\u0440\u0438\u043c\u043e\u0440\u0438\u0430\u043b\u044c\u043d\u043e\u0435 \u0434\u0435\u0440\u0435\u0432\u043e</CardTitle>\n+        </CardHeader>\n+        <CardContent className=\"pt-0\">\n+          <form className=\"flex flex-col gap-3 md:flex-row\" onSubmit={handleSubmit}>\n+            <Input data-testid=\"number-input\" onChange={(event) => setNumberValue(event.target.value)} value={numberValue} />\n+            <Button data-testid=\"analyze-number-button\" disabled={numberLoading} type=\"submit\">\n+              {numberLoading ? \"\u041f\u0440\u043e\u0432\u0435\u0440\u044f\u0435\u043c...\" : \"\u0410\u043d\u0430\u043b\u0438\u0437\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0447\u0438\u0441\u043b\u043e\"}\n+            </Button>\n+          </form>\n+        </CardContent>\n+      </Card>\n+\n+      {numberResult && (\n+        <>\n+          <section className=\"grid gap-4 lg:grid-cols-4\">\n+            <Card className=\"panel-glass border-white/10\" data-testid=\"number-status-card\">\n+              <CardContent className=\"space-y-2 p-5\">\n+                <p className=\"text-xs uppercase tracking-[0.2em] text-muted-foreground\">\u0441\u0442\u0430\u0442\u0443\u0441</p>\n+                <div className=\"flex items-center gap-3\">\n+                  <span className=\"mono-value text-3xl text-foreground\">{numberResult.number}</span>\n+                  <Badge className={numberResult.isPrime ? \"bg-primePositive/20 text-primePositive\" : \"bg-primeNegative/15 text-red-300\"} data-testid=\"number-status-badge\" variant=\"secondary\">\n+                    {numberResult.isPrime ? \"prime\" : \"composite\"}\n+                  </Badge>\n+                </div>\n+              </CardContent>\n+            </Card>\n+            <Card className=\"panel-glass border-white/10\" data-testid=\"power-distance-card\">\n+              <CardContent className=\"space-y-2 p-5\">\n+                <p className=\"text-xs uppercase tracking-[0.2em] text-muted-foreground\">\u0431\u043b\u0438\u0436\u0430\u0439\u0448\u0430\u044f \u0441\u0442\u0435\u043f\u0435\u043d\u044c 2</p>\n+                <p className=\"mono-value text-3xl text-foreground\">{numberResult.closestPowerOfTwo.power}</p>\n+                <p className=\"text-sm text-muted-foreground\">\u0440\u0430\u0441\u0441\u0442\u043e\u044f\u043d\u0438\u0435: {numberResult.closestPowerOfTwo.distance}</p>\n+              </CardContent>\n+            </Card>\n+            <Card className=\"panel-glass border-white/10\" data-testid=\"mirror-card\">\n+              <CardContent className=\"space-y-2 p-5\">\n+                <p className=\"text-xs uppercase tracking-[0.2em] text-muted-foreground\">\u0437\u0435\u0440\u043a\u0430\u043b\u043e \u043f\u043e \u043f\u0440\u0438\u043c\u043e\u0440\u0438\u0430\u043b\u0443</p>\n+                <p className=\"mono-value text-3xl text-foreground\">{numberResult.mirror.value}</p>\n+                <p className=\"text-sm text-muted-foreground\">\u0441\u0445\u043e\u0434\u0441\u0442\u0432\u043e \u0431\u0438\u0442\u043e\u0432: {numberResult.mirror.hammingSimilarity}</p>\n+              </CardContent>\n+            </Card>\n+            <Card className=\"panel-glass border-white/10\" data-testid=\"nearest-formula-card\">\n+              <CardContent className=\"space-y-2 p-5\">\n+                <p className=\"text-xs uppercase tracking-[0.2em] text-muted-foreground\">\u0431\u043b\u0438\u0436\u0430\u0439\u0448\u0438\u0439 \u043a\u0430\u043d\u0434\u0438\u0434\u0430\u0442 \u0444\u043e\u0440\u043c\u0443\u043b\u044b</p>\n+                <p className=\"mono-value text-3xl text-foreground\">{numberResult.nearestFormulaCandidate.candidate}</p>\n+                <p className=\"text-sm text-muted-foreground\">\u0440\u0430\u0441\u0441\u0442\u043e\u044f\u043d\u0438\u0435: {numberResult.nearestFormulaCandidate.distance}</p>\n+              </CardContent>\n+            </Card>\n+          </section>\n+\n+          <section className=\"grid gap-6 xl:grid-cols-[0.85fr_1.15fr]\">\n+            <Card className=\"panel-glass border-white/10\" data-testid=\"binary-profile-card\">\n+              <CardHeader>\n+                <p className=\"text-xs uppercase tracking-[0.25em] text-muted-foreground\">\u0434\u0432\u043e\u0438\u0447\u043d\u044b\u0439 \u043f\u0440\u043e\u0444\u0438\u043b\u044c</p>\n+                <CardTitle className=\"mt-2 text-2xl font-heading\">\u041a\u0430\u043a \u0447\u0438\u0441\u043b\u043e \u0432\u044b\u0433\u043b\u044f\u0434\u0438\u0442 \u0432 \u0431\u0438\u0442\u0430\u0445</CardTitle>\n+              </CardHeader>\n+              <CardContent className=\"space-y-5 pt-0\">\n+                <div className=\"flex flex-wrap gap-2 text-sm\" data-testid=\"binary-bit-grid\">\n+                  {renderBits(numberResult.binaryProfile.bits)}\n+                </div>\n+                <div className=\"grid gap-4 md:grid-cols-2\">\n+                  <div data-testid=\"bit-length-value\">\n+                    <p className=\"text-xs uppercase tracking-[0.2em] text-muted-foreground\">\u0434\u043b\u0438\u043d\u0430</p>\n+                    <p className=\"mono-value mt-2 text-2xl text-foreground\">{numberResult.binaryProfile.bitLength}</p>\n+                  </div>\n+                  <div data-testid=\"ones-count-value\">\n+                    <p className=\"text-xs uppercase tracking-[0.2em] text-muted-foreground\">\u0435\u0434\u0438\u043d\u0438\u0446\u044b</p>\n+                    <p className=\"mono-value mt-2 text-2xl text-foreground\">{numberResult.binaryProfile.ones}</p>\n+                  </div>\n+                  <div data-testid=\"one-density-value\">\n+                    <p className=\"text-xs uppercase tracking-[0.2em] text-muted-foreground\">\u043f\u043b\u043e\u0442\u043d\u043e\u0441\u0442\u044c \u0435\u0434\u0438\u043d\u0438\u0446</p>\n+                    <p className=\"mono-value mt-2 text-2xl text-foreground\">{numberResult.binaryProfile.oneDensity}</p>\n+                  </div>\n+                  <div data-testid=\"factor-list-value\">\n+                    <p className=\"text-xs uppercase tracking-[0.2em] text-muted-foreground\">\u0444\u0430\u043a\u0442\u043e\u0440\u044b</p>\n+                    <p className=\"mono-value mt-2 text-lg text-foreground\">\n+                      {numberResult.factors.length ? numberResult.factors.join(\" \u00d7 \") : \"\u2014\"}\n+                    </p>\n+                  </div>\n+                </div>\n+              </CardContent>\n+            </Card>\n+\n+            <Card className=\"panel-glass border-white/10\" data-testid=\"primorial-path-card\">\n+              <CardHeader>\n+                <p className=\"text-xs uppercase tracking-[0.25em] text-muted-foreground\">\u0434\u0435\u0440\u0435\u0432\u043e \u0430\u0434\u0440\u0435\u0441\u0430\u0446\u0438\u0438</p>\n+                <CardTitle className=\"mt-2 text-2xl font-heading\">\u041f\u0443\u0442\u044c \u0447\u0438\u0441\u043b\u0430 \u043f\u043e \u043f\u0440\u0438\u043c\u043e\u0440\u0438\u0430\u043b\u044c\u043d\u044b\u043c \u0443\u0440\u043e\u0432\u043d\u044f\u043c</CardTitle>\n+              </CardHeader>\n+              <CardContent className=\"pt-0\">\n+                <Table data-testid=\"primorial-path-table\">\n+                  <TableHeader>\n+                    <TableRow>\n+                      <TableHead>\u0423\u0440\u043e\u0432\u0435\u043d\u044c</TableHead>\n+                      <TableHead>\u041f\u0440\u0438\u043c\u043e\u0440\u0438\u0430\u043b</TableHead>\n+                      <TableHead>\u041e\u0441\u0442\u0430\u0442\u043e\u043a</TableHead>\n+                      <TableHead>\u0412\u0435\u0442\u043a\u0430</TableHead>\n+                      <TableHead>\u0421\u0442\u0430\u0442\u0443\u0441</TableHead>\n+                    </TableRow>\n+                  </TableHeader>\n+                  <TableBody>\n+                    {numberResult.primorialPath.map((level) => (\n+                      <TableRow data-testid={`number-level-row-${level.depth}`} key={level.primorial}>\n+                        <TableCell>{level.depth}</TableCell>\n+                        <TableCell className=\"mono-value\">{level.primorial}</TableCell>\n+                        <TableCell className=\"mono-value\">{level.address.residue}</TableCell>\n+                        <TableCell className=\"mono-value\">{level.address.branchIndex}</TableCell>\n+                        <TableCell className={level.address.coprime ? \"text-primePositive\" : \"text-red-300\"}>\n+                          {level.address.coprime ? \"survives\" : \"cuts off\"}\n+                        </TableCell>\n+                      </TableRow>\n+                    ))}\n+                  </TableBody>\n+                </Table>\n+              </CardContent>\n+            </Card>\n+          </section>\n+        </>\n+      )}\n+    </div>\n+  );\n+}\n*** End Patch", "run_lint": false})
+Observation: Patch applied successfully (5 file ops).Почти собрал — сейчас правлю мелочи в логике и проверяю, что всё компилируется.
+Action: apply_patch({"patch": "*** Begin Patch\n*** Update File: /app/frontend/src/App.js\n@@\n-  useEffect(() => {\n-    loadSnapshot(DEFAULT_CONFIG);\n-    analyzeNumber(\"2311\", DEFAULT_CONFIG.limit);\n-  }, [analyzeNumber, loadSnapshot]);\n+  useEffect(() => {\n+    loadSnapshot(DEFAULT_CONFIG);\n+    analyzeNumber(\"2311\", DEFAULT_CONFIG.limit);\n+  }, []);\n*** End Patch", "run_lint": false})
+Observation: Patch applied successfully (1 file ops).Небольшая полировка перед проверкой: убираю потенциальные предупреждения линтера.
+Action: apply_patch({"patch": "*** Begin Patch\n*** Update File: /app/frontend/src/App.js\n@@\n-import { useCallback, useEffect, useState } from \"react\";\n+import { useCallback, useEffect, useRef, useState } from \"react\";\n@@\n export default function App() {\n+  const hasBootstrapped = useRef(false);\n   const [config, setConfig] = useState(DEFAULT_CONFIG);\n@@\n   const applyConfig = useCallback(async (nextConfig) => {\n     setConfig(nextConfig);\n     await loadSnapshot(nextConfig);\n     await analyzeNumber(numberValue, nextConfig.limit);\n     toast.success(\"\u0424\u043e\u0440\u043c\u0443\u043b\u0430 \u0438 \u043c\u0435\u0442\u0440\u0438\u043a\u0438 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u044b.\");\n   }, [analyzeNumber, loadSnapshot, numberValue]);\n \n   useEffect(() => {\n+    if (hasBootstrapped.current) {\n+      return;\n+    }\n+\n+    hasBootstrapped.current = true;\n     loadSnapshot(DEFAULT_CONFIG);\n     analyzeNumber(\"2311\", DEFAULT_CONFIG.limit);\n-  }, []);\n+  }, [analyzeNumber, loadSnapshot]);\n*** Update File: /app/backend/research_engine.py\n@@\n-def build_primorial_levels(base_primes: List[int], limit: int, number: int | None = None) -> List[Dict[str, Any]]:\n+def build_primorial_levels(base_primes: List[int], _limit: int, number: int | None = None) -> List[Dict[str, Any]]:\n*** End Patch", "run_lint": false})
+Observation: Patch applied successfully (2 file ops).Проверка упёрлась в загрузку страницы — смотрю логи фронтенда и консоль браузера.
+Action: file_editor view /root/.emergent/automation_output/20260317_150750/console_20260317_150750.log
+Observation: [Showing lines 1-194 of 194 total] /root/.emergent/automation_output/20260317_150750/console_20260317_150750.log:
+1|log: https://number-resonance.preview.emergentagent.com at https://number-resonance.preview.emergentagent.com/:26:17
+2|log: https://number-resonance.preview.emergentagent.com at https://number-resonance.preview.emergentagent.com/:26:17
+3|log: https://number-resonance.preview.emergentagent.com at https://number-resonance.preview.emergentagent.com/:26:17
+4|log: https://number-resonance.preview.emergentagent.com at https://number-resonance.preview.emergentagent.com/:26:17
+5|log: https://number-resonance.preview.emergentagent.com at https://number-resonance.preview.emergentagent.com/:26:17
+6|log: https://number-resonance.preview.emergentagent.com at https://number-resonance.preview.emergentagent.com/:26:17
+7|log: https://number-resonance.preview.emergentagent.com at https://number-resonance.preview.emergentagent.com/:26:17
+8|log: https://number-resonance.preview.emergentagent.com at https://number-resonance.preview.emergentagent.com/:26:17
+9|log: https://number-resonance.preview.emergentagent.com at https://number-resonance.preview.emergentagent.com/:26:17
+10|log: https://number-resonance.preview.emergentagent.com at https://number-resonance.preview.emergentagent.com/:26:17
+11|REQUEST FAILED: https://www.google.com/ccm/collect?frm=2&ae=g&en=page_view&dr=number-resonance.preview.emergentagent.com&dl=https%3A%2F%2Fapp.emergent.sh%2Floading-preview&scrsrc=www.googletagmanager.com&rnd=1875525986.1773760075&dt=Emergent&navt=n&npa=0&ep.ads_data_redaction=0&gtm=45He63d1v9226553076za200zd9226553076xea&gcd=13l3l3l3l1l1&dma=0&tag_exp=103116026~103200004~115616985~115938466~115938469~116024733~117484252&apve=1&apvf=f&apvc=1&tft=1773760075092&tfd=1698 - net::ERR_ABORTED
+12|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+13|REQUEST FAILED: https://www.google.com/ccm/collect?frm=2&en=page_view&dr=number-resonance.preview.emergentagent.com&dl=https%3A%2F%2Fapp.emergent.sh%2Floading-preview&scrsrc=www.googletagmanager.com&rnd=1875525986.1773760075&dt=Emergent&navt=n&npa=0&gtm=45be63d1v9226552042z89226553076za20gzb9226553076zd9226553076xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=103116026~103200004~115938466~115938469~116024733~117484252&apve=1&apvf=f&apvc=0&tids=AW-17435340384&tid=AW-17435340384&tft=1773760075897&tfd=2503 - net::ERR_ABORTED
+14|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+15|warning: [Meta Pixel] - An invalid email address was specified for 'em'. This data will not be sent with any events for this Pixel. at https://app.emergent.sh/main-pzONtb7E.js:4:187816
+16|warning: [Meta Pixel] - You are sending a non-standard event 'SubscribedButtonClick'. The preferred way to send these events is using trackCustom. See 'https://developers.facebook.com/docs/ads-for-websites/pixel-events/#events' for more information. at https://app.emergent.sh/main-pzONtb7E.js:4:187816
+17|warning: DataCloneError: Failed to execute 'postMessage' on 'Window': PerformanceServerTiming object could not be cloned.
+18|    at as (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:190147)
+19|    at callback (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:195343)
+20|    at s (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:216441)
+21|    at $o (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:211287)
+22|    at Object.ra [as observer] (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:216468)
+23|    at Hn (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:165975)
+24|    at K (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:193867)
+25|    at Q (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:195517)
+26|    at Ss (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:195613)
+27|    at _h.oe (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:252031) at https://app.emergent.sh/main-pzONtb7E.js:4:187816
+28|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+29|warning: DataCloneError: Failed to execute 'postMessage' on 'Window': PerformanceServerTiming object could not be cloned.
+30|    at as (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:190147)
+31|    at callback (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:195343)
+32|    at s (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:216441)
+33|    at $o (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:211287)
+34|    at Object.ra [as observer] (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:216468)
+35|    at Hn (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:165975)
+36|    at K (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:193867)
+37|    at Zn.loadListener (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:195443)
+38|    at Zn.attachIframe (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:169014)
+39|    at onIframeLoad (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:193398) at https://app.emergent.sh/main-pzONtb7E.js:4:187816
+40|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+41|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+42|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+43|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+44|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+45|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+46|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+47|warning: Failed to parse video contentType: video/mp4; codecs=hvc1.1.6.L93.B0 at https://app.emergent.sh/yYu6hLHLpQEW2ELz/BJnqq7CRgAe18QLk/web/v4/bjLV9OY0jn9FyljSQFMn?ci=jsl/4.0.0:4:0
+48|warning: Failed to parse video contentType: video/mp4; codecs=avc1.640028 at https://app.emergent.sh/yYu6hLHLpQEW2ELz/BJnqq7CRgAe18QLk/web/v4/bjLV9OY0jn9FyljSQFMn?ci=jsl/4.0.0:4:0
+49|warning: Failed to parse video contentType: video/mp4; codecs=avc1.640033 at https://app.emergent.sh/yYu6hLHLpQEW2ELz/BJnqq7CRgAe18QLk/web/v4/bjLV9OY0jn9FyljSQFMn?ci=jsl/4.0.0:4:0
+50|warning: Failed to parse audio contentType: audio/mp4; codecs=mp4a.40.5 at https://app.emergent.sh/yYu6hLHLpQEW2ELz/BJnqq7CRgAe18QLk/web/v4/bjLV9OY0jn9FyljSQFMn?ci=jsl/4.0.0:4:0
+51|warning: No available adapters. at https://app.emergent.sh/loading-preview?host=number-resonance:0:0
+52|debug:   at https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:0:202678
+53|warning: No available adapters. at https://app.emergent.sh/loading-preview?host=number-resonance:0:0
+54|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+55|warning: [.WebGL-0x440b061200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels at https://app.emergent.sh/loading-preview?host=number-resonance:0:0
+56|error: Failed to load resource: the server responded with a status of 404 () at https://number-resonance.preview.emergentagent.com/api/research/overview?limit=10000&base_primes=2%2C3%2C5%2C7%2C11:0:0
+57|error: ni at https://assets.emergent.sh/scripts/emergent-main.js:38:30
+58|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+59|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+60|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+61|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+62|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+63|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+64|REQUEST FAILED: https://snap.licdn.com/li.lms-analytics/insight.min.js - net::ERR_ABORTED
+65|REQUEST FAILED: https://number-resonance.preview.emergentagent.com/cdn-cgi/rum? - net::ERR_ABORTED
+66|warning: [Meta Pixel] - An invalid email address was specified for 'em'. This data will not be sent with any events for this Pixel. at https://connect.facebook.net/en_US/fbevents.js:175:516
+67|warning: [Meta Pixel] - You are sending a non-standard event 'SubscribedButtonClick'. The preferred way to send these events is using trackCustom. See 'https://developers.facebook.com/docs/ads-for-websites/pixel-events/#events' for more information. at https://connect.facebook.net/en_US/fbevents.js:175:516
+68|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+69|REQUEST FAILED: https://www.google.com/ccm/collect?frm=2&ae=g&en=page_view&dr=number-resonance.preview.emergentagent.com&dl=https%3A%2F%2Fapp.emergent.sh%2Floading-preview&scrsrc=www.googletagmanager.com&rnd=1280848776.1773760083&dt=Emergent&navt=n&npa=0&ep.ads_data_redaction=0&gtm=45He63d1v9226553076za200zd9226553076xea&gcd=13l3l3l3l1l1&dma=0&tag_exp=103116026~103200004~115938465~115938468~116024733~117484252&apve=1&apvf=f&apvc=1&tft=1773760083503&tfd=314 - net::ERR_ABORTED
+70|REQUEST FAILED: https://www.google.com/ccm/collect?frm=2&en=page_view&dr=number-resonance.preview.emergentagent.com&dl=https%3A%2F%2Fapp.emergent.sh%2Floading-preview&scrsrc=www.googletagmanager.com&rnd=1280848776.1773760083&dt=Emergent&navt=n&npa=0&gtm=45be63d1v9226552042z89226553076za20gzb9226553076zd9226553076xec&gcd=13l3l3l3l1l1&dma=0&tag_exp=103116026~103200004~115938465~115938469~116024733~117484252&apve=1&apvf=f&apvc=0&tids=AW-17435340384&tid=AW-17435340384&tft=1773760083708&tfd=519 - net::ERR_ABORTED
+71|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+72|warning: DataCloneError: Failed to execute 'postMessage' on 'Window': PerformanceServerTiming object could not be cloned.
+73|    at as (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:190147)
+74|    at callback (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:195343)
+75|    at s (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:216441)
+76|    at $o (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:211287)
+77|    at Object.ra [as observer] (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:216468)
+78|    at Hn (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:165975)
+79|    at K (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:193867)
+80|    at Q (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:195517)
+81|    at Ss (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:195613)
+82|    at _h.oe (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:252031) at https://app.emergent.sh/main-pzONtb7E.js:4:187816
+83|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+84|warning: DataCloneError: Failed to execute 'postMessage' on 'Window': PerformanceServerTiming object could not be cloned.
+85|    at as (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:190147)
+86|    at callback (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:195343)
+87|    at s (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:216441)
+88|    at $o (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:211287)
+89|    at Object.ra [as observer] (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:216468)
+90|    at Hn (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:165975)
+91|    at K (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:193867)
+92|    at Zn.loadListener (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:195443)
+93|    at Zn.attachIframe (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:169014)
+94|    at onIframeLoad (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:193398) at https://app.emergent.sh/main-pzONtb7E.js:4:187816
+95|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+96|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+97|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+98|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+99|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+100|warning: DataCloneError: Failed to execute 'postMessage' on 'Window': PerformanceServerTiming object could not be cloned.
+101|    at as (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:190147)
+102|    at callback (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:195343)
+103|    at s (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:216441)
+104|    at $o (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:211287)
+105|    at Object.ra [as observer] (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:216468)
+106|    at Hn (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:165975)
+107|    at K (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:193867)
+108|    at Q (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:195517)
+109|    at Ss (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:195613)
+110|    at _h.oe (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:252031) at https://app.emergent.sh/main-pzONtb7E.js:4:187816
+111|warning: DataCloneError: Failed to execute 'postMessage' on 'Window': PerformanceServerTiming object could not be cloned.
+112|    at as (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:190147)
+113|    at callback (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:195343)
+114|    at s (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:216441)
+115|    at $o (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:211287)
+116|    at Object.ra [as observer] (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:216468)
+117|    at Hn (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:165975)
+118|    at K (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:193867)
+119|    at Q (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:195517)
+120|    at Ss (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:195613)
+121|    at _h.oe (https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:1:252031) at https://app.emergent.sh/main-pzONtb7E.js:4:187816
+122|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+123|warning: Failed to parse video contentType: video/mp4; codecs=hvc1.1.6.L93.B0 at https://app.emergent.sh/yYu6hLHLpQEW2ELz/BJnqq7CRgAe18QLk/web/v4/bjLV9OY0jn9FyljSQFMn?ci=jsl/4.0.0:4:0
+124|warning: Failed to parse video contentType: video/mp4; codecs=avc1.640028 at https://app.emergent.sh/yYu6hLHLpQEW2ELz/BJnqq7CRgAe18QLk/web/v4/bjLV9OY0jn9FyljSQFMn?ci=jsl/4.0.0:4:0
+125|warning: Failed to parse video contentType: video/mp4; codecs=avc1.640033 at https://app.emergent.sh/yYu6hLHLpQEW2ELz/BJnqq7CRgAe18QLk/web/v4/bjLV9OY0jn9FyljSQFMn?ci=jsl/4.0.0:4:0
+126|warning: Failed to parse audio contentType: audio/mp4; codecs=mp4a.40.5 at https://app.emergent.sh/yYu6hLHLpQEW2ELz/BJnqq7CRgAe18QLk/web/v4/bjLV9OY0jn9FyljSQFMn?ci=jsl/4.0.0:4:0
+127|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+128|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+129|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+130|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+131|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+132|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+133|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+134|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+135|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+136|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+137|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+138|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+139|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+140|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+141|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+142|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+143|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+144|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+145|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+146|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+147|warning: No available adapters. at https://app.emergent.sh/loading-preview?host=number-resonance:0:0
+148|warning: No available adapters. at https://app.emergent.sh/loading-preview?host=number-resonance:0:0
+149|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+150|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+151|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+152|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+153|debug:   at https://ap.emergent.sh/static/posthog-recorder.js?v=1.298.0:0:202678
+154|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+155|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+156|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+157|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+158|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+159|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+160|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+161|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+162|warning: [.WebGL-0x4400132200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels at https://app.emergent.sh/loading-preview?host=number-resonance:0:0
+163|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+164|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+165|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+166|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+167|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+168|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+169|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+170|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+171|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+172|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+173|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+174|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+175|error: Failed to load resource: the server responded with a status of 404 () at https://number-resonance.preview.emergentagent.com/api/research/overview?limit=10000&base_primes=2%2C3%2C5%2C7%2C11:0:0
+176|error: ni at https://assets.emergent.sh/scripts/emergent-main.js:38:30
+177|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+178|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+179|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+180|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+181|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+182|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+183|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+184|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+185|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+186|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+187|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+188|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+189|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+190|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+191|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+192|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+193|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+194|log: https://app.emergent.sh at https://number-resonance.preview.emergentagent.com/:26:17
+[End of file]Нашёл причину: фронтенд падает на теме. Исправляю это и сразу повторяю прогон.
+Action: apply_patch({"patch": "*** Begin Patch\n*** Update File: /app/frontend/src/App.js\n@@\n export default function App() {\n   const hasBootstrapped = useRef(false);\n+  const configRef = useRef(DEFAULT_CONFIG);\n   const [config, setConfig] = useState(DEFAULT_CONFIG);\n@@\n-  const analyzeNumber = useCallback(async (value, limit = config.limit) => {\n+  const analyzeNumber = useCallback(async (value, limit = configRef.current.limit) => {\n@@\n-  }, [config.limit]);\n+  }, []);\n \n   const applyConfig = useCallback(async (nextConfig) => {\n+    configRef.current = nextConfig;\n     setConfig(nextConfig);\n     await loadSnapshot(nextConfig);\n     await analyzeNumber(numberValue, nextConfig.limit);\n     toast.success(\"\u0424\u043e\u0440\u043c\u0443\u043b\u0430 \u0438 \u043c\u0435\u0442\u0440\u0438\u043a\u0438 \u043e\u0431\u043d\u043e\u0432\u043b\u0435\u043d\u044b.\");\n   }, [analyzeNumber, loadSnapshot, numberValue]);\n+\n+  useEffect(() => {\n+    configRef.current = config;\n+  }, [config]);\n*** Update File: /app/frontend/src/index.css\n@@\n-    html {\n-        @apply dark;\n-    }\n-\n     body {\n         @apply bg-background text-foreground;\n*** End Patch", "run_lint": false})
+Observation: Patch applied successfully (2 file ops).
+
+
+
+
+
+
+
